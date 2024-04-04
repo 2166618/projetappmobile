@@ -5,16 +5,28 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_tableau_de_bord"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/nav_tableau_de_bord" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_familles"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_familles" />
+        <item
+            android:id="@+id/nav_enfants"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_enfants" />
+        <item
+            android:id="@+id/nav_profil_famille"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_creer_profil_famille" />
+        <item
+            android:id="@+id/nav_profil_enfant"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_creer_profil_enfant" />
+        <item
+            android:id="@+id/nav_modifier_informations_compte"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_modifier_informations_compte" />
     </group>
 </menu>

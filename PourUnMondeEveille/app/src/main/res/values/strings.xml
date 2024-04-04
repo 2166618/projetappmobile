@@ -7,7 +7,15 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="nav_titre">Bonjour Intervenant</string>
+    <string name="nav_sous_titre">OBNL Monde Éveillé - Québec</string>
+
+    <string name="nav_tableau_de_bord">Tableau de bord</string>
+    <string name="nav_familles">Familles</string>
+    <string name="nav_enfants">Enfants</string>
+    <string name="nav_creer_profil_famille">Créer un profil famille</string>
+    <string name="nav_creer_profil_enfant">Créer un profil enfant</string>
+    <string name="nav_modifier_informations_compte">Modifier les informations du compte</string>
+
+
 </resources>

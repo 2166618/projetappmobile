@@ -1,14 +1,14 @@
-package com.example.pourunmondeeveille.ui.gallery;
+package com.example.pourunmondeeveille.ui.familles;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class FamillesViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public FamillesViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is gallery fragment");
     }
