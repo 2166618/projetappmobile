@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_tableau_de_bord" />
 
     <fragment
-        android:id="@+id/nav_familles"
-        android:name="com.example.pourunmondeeveille.ui.familles.FamillesFragment"
-        android:label="@string/nav_familles"
-        tools:layout="@layout/fragment_familles" />
+        android:id="@+id/nav_recherche_pour_placement"
+        android:name="com.example.pourunmondeeveille.ui.recherche.RechercheFragment"
+        android:label="@string/nav_recherche_pour_placement"
+        tools:layout="@layout/fragment_recherche" />
 
     <fragment
-        android:id="@+id/nav_enfants"
+        android:id="@+id/nav_modifier_informations_compte"
         android:name="com.example.pourunmondeeveille.ui.enfants.EnfantFragment"
-        android:label="@string/nav_enfants"
+        android:label="@string/nav_modifier_informations_compte"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

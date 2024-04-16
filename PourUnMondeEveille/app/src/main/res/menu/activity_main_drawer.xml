@@ -9,21 +9,9 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/nav_tableau_de_bord" />
         <item
-            android:id="@+id/nav_familles"
+            android:id="@+id/nav_recherche_pour_placement"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_familles" />
-        <item
-            android:id="@+id/nav_enfants"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_enfants" />
-        <item
-            android:id="@+id/nav_profil_famille"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_creer_profil_famille" />
-        <item
-            android:id="@+id/nav_profil_enfant"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_creer_profil_enfant" />
+            android:title="@string/nav_recherche_pour_placement" />
         <item
             android:id="@+id/nav_modifier_informations_compte"
             android:icon="@drawable/ic_menu_gallery"

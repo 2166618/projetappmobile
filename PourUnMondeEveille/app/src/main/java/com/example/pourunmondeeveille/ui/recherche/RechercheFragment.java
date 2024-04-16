@@ -1,4 +1,4 @@
-package com.example.pourunmondeeveille.ui.familles;
+package com.example.pourunmondeeveille.ui.recherche;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.pourunmondeeveille.databinding.FragmentFamillesBinding;
+import com.example.pourunmondeeveille.databinding.FragmentRechercheBinding;
 
-public class FamillesFragment extends Fragment {
+public class RechercheFragment extends Fragment {
 
-    private FragmentFamillesBinding binding;
+    private FragmentRechercheBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        FamillesViewModel famillesViewModel =
-                new ViewModelProvider(this).get(FamillesViewModel.class);
+        RechercheViewModel rechercheViewModel =
+                new ViewModelProvider(this).get(RechercheViewModel.class);
 
-        binding = FragmentFamillesBinding.inflate(inflater, container, false);
+        binding = FragmentRechercheBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textFamilles;
-        famillesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textRecherche;
+        rechercheViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
