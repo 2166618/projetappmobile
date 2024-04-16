@@ -14,5 +14,7 @@
     <string name="nav_recherche_pour_placement">Recherche pour placement</string>
     <string name="nav_modifier_informations_compte">Modifier les informations du compte</string>
 
+    <string name="bienvenue">Bienvenue !</string>
+
 
 </resources>

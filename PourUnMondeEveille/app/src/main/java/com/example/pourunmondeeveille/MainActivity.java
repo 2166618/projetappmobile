@@ -1,9 +1,11 @@
 package com.example.pourunmondeeveille;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
+import com.example.pourunmondeeveille.ui.connexionetcreationdecompte.PageAccueil;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -24,6 +26,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Check if user is logged in
+        if (!isLoggedIn()) {
+            // If not logged in, redirect to login activity
+            Intent pageAccueilIntent = new Intent(this, PageAccueil.class);
+            startActivity(pageAccueilIntent);
+            finish();
+            return;
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -47,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    // Method to check if user is logged in
+    private boolean isLoggedIn() {
+        // Implement your logic to check if user is logged in
+        // For example, you could check if a user session exists or if user credentials are stored
+        // Return true if logged in, false otherwise
+        return false;
     }
 
     @Override
