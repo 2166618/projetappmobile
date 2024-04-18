@@ -15,6 +15,17 @@
     <string name="nav_modifier_informations_compte">Modifier les informations du compte</string>
 
     <string name="bienvenue">Bienvenue !</string>
+    <string name="connexion">CONNEXION</string>
+    <string name="creation_compte">SE CRÉER UN COMPTE</string>
+
+    <string name="authentification">Authentification</string>
+    <string name="courriel">Courriel:</string>
+    <string name="mot_de_passe">Mot de passe:</string>
+    <string name="titre_creation_compte">Se créer un compte</string>
+
+
+
+
 
 
 </resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.connexionetcreationdecompte.ConnexionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/authentificationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/authentification"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="-127dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:id="@+id/courrielTextView"
+                android:layout_width="73dp"
+                android:layout_height="wrap_content"
+                android:text="@string/courriel"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/courrielEditText"
+                android:layout_width="280dp"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="82dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="-127dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:id="@+id/mdpTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mot_de_passe"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/mdpEditText"
+                android:layout_width="250dp"
+                android:layout_height="50dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnConnexion"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/connexion" />
+
+        <Button
+            android:id="@+id/btnCreationCompte"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/creation_compte" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

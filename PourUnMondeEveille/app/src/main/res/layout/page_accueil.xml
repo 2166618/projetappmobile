@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.connexionetcreationdecompte.PageAccueil">
 
     <LinearLayout
+        android:id="@+id/contenu_accueil"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -31,8 +33,27 @@
             android:layout_marginTop="20dp"
             android:text="@string/bienvenue" />
 
+        <Button
+            android:id="@+id/btnConnexion"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/connexion" />
 
+        <Button
+            android:id="@+id/btnCreationCompte"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/creation_compte" />
 
     </LinearLayout>
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/contenu_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>
