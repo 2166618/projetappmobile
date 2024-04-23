@@ -1,4 +1,4 @@
-package com.example.pourunmondeeveille.ui.connexionetcreationdecompte;
+package com.example.pourunmondeeveille;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +9,10 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pourunmondeeveille.R;
+import com.example.pourunmondeeveille.ui.connexion.ConnexionFragment;
+import com.example.pourunmondeeveille.ui.creationcompte.CreationCompteFragment;
 
-public class PageAccueil extends AppCompatActivity {
+public class PageAccueilActivity extends AppCompatActivity {
 
     private LinearLayout contenuAccueil;
     private FrameLayout contenuFragment;
@@ -51,8 +53,6 @@ public class PageAccueil extends AppCompatActivity {
 
             }
         });
-
     }
-
 
 }

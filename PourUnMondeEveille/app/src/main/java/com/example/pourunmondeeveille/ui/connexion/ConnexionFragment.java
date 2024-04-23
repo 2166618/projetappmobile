@@ -1,4 +1,4 @@
-package com.example.pourunmondeeveille.ui.connexionetcreationdecompte;
+package com.example.pourunmondeeveille.ui.connexion;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,14 +6,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pourunmondeeveille.MainActivity;
 import com.example.pourunmondeeveille.R;
+import com.example.pourunmondeeveille.ui.creationcompte.CreationCompteFragment;
 
 public class ConnexionFragment extends Fragment {
+    private ConnexionViewModel connexionViewModel;
+    private EditText courrielEditText;
+    private EditText motDePasseEditText;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        connexionViewModel = new ViewModelProvider(this).get(ConnexionViewModel.class);
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -22,11 +36,26 @@ public class ConnexionFragment extends Fragment {
         Button btnConnexion = view.findViewById(R.id.btnConnexion);
         Button btnCreationCompte = view.findViewById(R.id.btnCreationCompte);
 
+        connexionViewModel.getConnexionResponse().observe(getViewLifecycleOwner(), connexionResponse -> {
+            if (connexionResponse != null && connexionResponse.isSuccess()) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getContext(), "Connexion échouée", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), MainActivity.class);
+//                startActivity(intent);
+
+                String nomUtilisateur = courrielEditText.getText().toString();
+                String motDePasse = motDePasseEditText.getText().toString();
+
+                connexionViewModel.connexionUtilisateur(nomUtilisateur, motDePasse);
+
             }
         });
 

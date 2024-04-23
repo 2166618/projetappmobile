@@ -1,4 +1,4 @@
-package com.example.pourunmondeeveille.ui.connexionetcreationdecompte;
+package com.example.pourunmondeeveille.ui.creationcompte;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pourunmondeeveille.MainActivity;
 import com.example.pourunmondeeveille.R;
+import com.example.pourunmondeeveille.ui.connexion.ConnexionFragment;
 
 public class CreationCompteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

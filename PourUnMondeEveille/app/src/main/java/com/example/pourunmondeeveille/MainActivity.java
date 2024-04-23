@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 
-import com.example.pourunmondeeveille.ui.connexionetcreationdecompte.PageAccueil;
+import com.example.pourunmondeeveille.bd.ApiService;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pourunmondeeveille.databinding.ActivityMainBinding;
 
+import retrofit2.Retrofit;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -27,10 +29,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Retrofit retrofit = PageAccueilActivity.getRetrofitInstance();
+        ApiService service = retrofit.create(ApiService.class);
+
         // Check if user is logged in
         if (!isLoggedIn()) {
             // If not logged in, redirect to login activity
-            Intent pageAccueilIntent = new Intent(this, PageAccueil.class);
+            Intent pageAccueilIntent = new Intent(this, PageAccueilActivity.class);
             startActivity(pageAccueilIntent);
             finish();
             return;
