@@ -18,7 +18,7 @@ public class PageAccueil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.page_accueil);
+        setContentView(R.layout.activity_page_accueil);
 
         contenuAccueil = findViewById(R.id.contenu_accueil);
         contenuFragment = findViewById(R.id.contenu_fragment);

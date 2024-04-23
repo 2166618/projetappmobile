@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         // Implement your logic to check if user is logged in
         // For example, you could check if a user session exists or if user credentials are stored
         // Return true if logged in, false otherwise
-        return false;
+        return true;
     }
 
     @Override
