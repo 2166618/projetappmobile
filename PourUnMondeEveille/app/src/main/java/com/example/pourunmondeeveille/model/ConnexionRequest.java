@@ -3,10 +3,10 @@ package com.example.pourunmondeeveille.model;
 import com.google.gson.annotations.SerializedName;
 
 public class ConnexionRequest {
-    @SerializedName("nom_utilisateur")
+    @SerializedName("username")
     private String nomUtilisateur;
 
-    @SerializedName("mot_de_passe")
+    @SerializedName("password")
     private String motDePasse;
 
     public ConnexionRequest(String nomUtilisateur, String motDePasse) {

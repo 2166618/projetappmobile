@@ -10,6 +10,8 @@ import com.example.pourunmondeeveille.bd.RetrofitClient;
 import com.example.pourunmondeeveille.model.ConnexionRequest;
 import com.example.pourunmondeeveille.model.ConnexionResponse;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,17 +39,28 @@ public class ConnexionViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     connexionResponseLiveData.setValue(response.body());
                 } else {
-                    // Gérer l'erreur de réponse HTTP
-                    connexionResponseLiveData.setValue(null);
-                    Log.e("MainActivity", "Erreur lors de la réponse HTTP");
+                    // Inclure le code de statut HTTP et un message d'erreur
+                    int statusCode = response.code();  // Récupérer le code de statut HTTP
+                    String errorMessage = "Erreur lors de la réponse HTTP. Code de statut : " + statusCode;
+                    if (response.errorBody() != null) {
+                        try {
+                            // Essayer d'obtenir des détails supplémentaires depuis le corps de l'erreur
+                            errorMessage += ". Détails : " + response.errorBody().string();
+                        } catch (IOException e) {
+                            errorMessage += ". Impossible de récupérer les détails de l'erreur.";
+                        }
+                    }
+                    connexionResponseLiveData.setValue(null);  // Indiquer un échec
+                    Log.e("ConnexionViewModel", errorMessage);  // Log avec détails supplémentaires
                 }
             }
 
             @Override
             public void onFailure(Call<ConnexionResponse> call, Throwable t) {
-                // Gérer les échecs de réseau
-                connexionResponseLiveData.setValue(null);
-                Log.e("MainActivity", "Échec de réseau");
+                // Inclure le message de l'exception dans le log
+                String failureMessage = "Échec du serveur. Erreur : " + t.getMessage();
+                connexionResponseLiveData.setValue(null);  // Indiquer un échec
+                Log.e("ConnexionViewModel", failureMessage, t);  // Log avec stack trace
             }
         });
     }

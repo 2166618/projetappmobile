@@ -19,7 +19,7 @@ public interface ApiService {
     @POST("utilisateurs")
     Call<Utilisateur> postUtilisateur(@Body Utilisateur utilisateur);
 
-    @POST("auth/connexion/")
+    @POST("auth/login/")  // Endpoint pour la connexion
     Call<ConnexionResponse> connexion(@Body ConnexionRequest request);
 
 

@@ -3,25 +3,39 @@ package com.example.pourunmondeeveille.model;
 import com.google.gson.annotations.SerializedName;
 
 public class ConnexionResponse {
-    @SerializedName("success")
-    private boolean success;  // Indique si la connexion a réussi
+    @SerializedName("id")
+    private int id;  // L'identifiant unique de l'utilisateur
 
-    @SerializedName("message")
-    private String message;  // Message d'erreur ou de succès
+    @SerializedName("username")
+    private String username;  // Le nom d'utilisateur
 
-    public boolean isSuccess() {
-        return success;
+    @SerializedName("email")
+    private String email;  // L'adresse e-mail de l'utilisateur
+
+    @SerializedName("first_name")
+    private String firstName;  // Le prénom (peut être vide)
+
+    @SerializedName("last_name")
+    private String lastName;  // Le nom de famille (peut être vide)
+
+    // Getters pour accéder aux valeurs des champs
+    public int getId() {
+        return id;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
+    public String getUsername() {
+        return username;
     }
 
-    public String getMessage() {
-        return message;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 }

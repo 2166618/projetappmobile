@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Menu;
 
 import com.example.pourunmondeeveille.bd.ApiService;
+import com.example.pourunmondeeveille.bd.RetrofitClient;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Retrofit retrofit = PageAccueilActivity.getRetrofitInstance();
+        Retrofit retrofit = RetrofitClient.getInstance();
         ApiService service = retrofit.create(ApiService.class);
 
         // Check if user is logged in
