@@ -19,9 +19,16 @@
             android:text="@string/titre_creation_compte"
             android:textSize="16sp" />
 
+        <EditText
+            android:id="@+id/editTextNomUtilisateur"
+            android:layout_width="280dp"
+            android:layout_height="70dp"
+            android:hint="@string/nom_utilisateur"
+            android:inputType="textEmailAddress" />
+
         <!-- Champ pour le courriel -->
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/editTextCourriel"
             android:layout_width="280dp"
             android:layout_height="70dp"
             android:hint="Courriel"
@@ -29,15 +36,15 @@
 
         <!-- Champ pour le mot de passe -->
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/editTextMotDePasse"
             android:layout_width="280dp"
             android:layout_height="70dp"
-            android:hint="Mot de passe"
+            android:hint="@string/mot_de_passe"
             android:inputType="textPassword" />
 
         <!-- Champ pour la confirmation du mot de passe -->
         <EditText
-            android:id="@+id/editTextConfirmPassword"
+            android:id="@+id/editTextConfirmerLeMotDePasse"
             android:layout_width="280dp"
             android:layout_height="70dp"
             android:hint="Confirmer le mot de passe"
@@ -56,6 +63,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/connexion" />
+
+        <!-- TextView pour afficher les erreurs -->
+        <TextView
+            android:id="@+id/error_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 

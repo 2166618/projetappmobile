@@ -19,8 +19,8 @@
     <string name="creation_compte">SE CRÉER UN COMPTE</string>
 
     <string name="authentification">Authentification</string>
-    <string name="nom_utilisateur">Nom d\'utilisateur:</string>
-    <string name="mot_de_passe">Mot de passe:</string>
+    <string name="nom_utilisateur">Nom d\'utilisateur</string>
+    <string name="mot_de_passe">Mot de passe</string>
     <string name="titre_creation_compte">Se créer un compte</string>
 
 

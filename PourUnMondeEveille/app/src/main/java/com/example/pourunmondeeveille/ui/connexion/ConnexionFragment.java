@@ -38,8 +38,8 @@ public class ConnexionFragment extends Fragment {
 
         Button btnConnexion = view.findViewById(R.id.btnConnexion);
         Button btnCreationCompte = view.findViewById(R.id.btnCreationCompte);
-        nomUtilisateurEditText = view.findViewById(R.id.nomUtilisateurEditText);
-        motDePasseEditText = view.findViewById(R.id.mdpEditText);
+        nomUtilisateurEditText = view.findViewById(R.id.editTextNomUtilisateur);
+        motDePasseEditText = view.findViewById(R.id.editTextPassword);
 
         // Observateur unique pour la connexion
         connexionViewModel.getConnexionResponse().observe(getViewLifecycleOwner(), new Observer<ConnexionResponse>() {

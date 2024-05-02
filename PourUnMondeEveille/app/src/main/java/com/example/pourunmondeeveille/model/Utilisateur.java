@@ -21,8 +21,9 @@ public class Utilisateur {
     @SerializedName("last_name")
     private String nomDeFamille;
 
-    public Utilisateur(String nomUtilisateur, String motDePasse) {
+    public Utilisateur(String nomUtilisateur, String courriel, String motDePasse) {
         this.nomUtilisateur = nomUtilisateur;
+        this.courriel = courriel;
         this.motDePasse = motDePasse;
     }
 

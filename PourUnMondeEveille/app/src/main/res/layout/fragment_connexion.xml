@@ -24,21 +24,13 @@
             android:layout_width="360dp"
             android:layout_height="70dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="-127dp"
-            tools:layout_editor_absoluteY="0dp">
-
-            <TextView
-                android:id="@+id/nomUtilisateurTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nom_utilisateur"
-                android:textSize="16sp" />
+            android:orientation="horizontal" >
 
             <EditText
-                android:id="@+id/nomUtilisateurEditText"
-                android:layout_width="235dp"
-                android:layout_height="50dp" />
+                android:id="@+id/editTextNomUtilisateur"
+                android:layout_width="280dp"
+                android:layout_height="70dp"
+                android:hint="@string/nom_utilisateur" />
 
         </LinearLayout>
 
@@ -51,17 +43,12 @@
             tools:layout_editor_absoluteX="-127dp"
             tools:layout_editor_absoluteY="0dp">
 
-            <TextView
-                android:id="@+id/mdpTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mot_de_passe"
-                android:textSize="16sp" />
-
             <EditText
-                android:id="@+id/mdpEditText"
-                android:layout_width="250dp"
-                android:layout_height="50dp" />
+                android:id="@+id/editTextPassword"
+                android:layout_width="280dp"
+                android:layout_height="70dp"
+                android:hint="@string/mot_de_passe"
+                android:inputType="textPassword" />
 
         </LinearLayout>
 
