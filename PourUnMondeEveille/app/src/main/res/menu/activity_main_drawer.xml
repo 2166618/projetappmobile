@@ -9,9 +9,13 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/nav_tableau_de_bord" />
         <item
-            android:id="@+id/nav_recherche_pour_placement"
+            android:id="@+id/nav_familles"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/nav_recherche_pour_placement" />
+            android:title="@string/nav_familles" />
+        <item
+            android:id="@+id/nav_enfants"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_enfants" />
         <item
             android:id="@+id/nav_modifier_informations_compte"
             android:icon="@drawable/ic_menu_gallery"

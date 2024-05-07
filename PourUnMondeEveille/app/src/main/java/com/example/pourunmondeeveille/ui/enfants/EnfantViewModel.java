@@ -20,7 +20,7 @@ public class EnfantViewModel extends ViewModel {
         apiService = retrofit.create(ApiService.class);
 
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        mText.setValue("This is enfants fragment");
     }
 
     public LiveData<String> getText() {

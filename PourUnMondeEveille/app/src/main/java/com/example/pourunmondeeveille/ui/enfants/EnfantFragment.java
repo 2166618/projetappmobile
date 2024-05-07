@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.pourunmondeeveille.databinding.FragmentSlideshowBinding;
+import com.example.pourunmondeeveille.databinding.FragmentEnfantsBinding;
 
 public class EnfantFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentEnfantsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         EnfantViewModel enfantViewModel =
                 new ViewModelProvider(this).get(EnfantViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentEnfantsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;

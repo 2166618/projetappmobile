@@ -11,12 +11,14 @@
     <string name="nav_sous_titre">OBNL Monde Éveillé - Québec</string>
 
     <string name="nav_tableau_de_bord">Tableau de bord</string>
-    <string name="nav_recherche_pour_placement">Recherche pour placement</string>
+    <string name="nav_familles">Familles</string>
+    <string name="nav_enfants">Enfants</string>
     <string name="nav_modifier_informations_compte">Modifier les informations du compte</string>
 
     <string name="bienvenue">Bienvenue !</string>
     <string name="connexion">CONNEXION</string>
     <string name="creation_compte">SE CRÉER UN COMPTE</string>
+
 
     <string name="authentification">Authentification</string>
     <string name="nom_utilisateur">Nom d\'utilisateur</string>
