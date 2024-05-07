@@ -30,6 +30,9 @@
         <activity android:name=".PageAccueilActivity"
             android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
         </activity>
+        <activity android:name=".model.familles.FamilleDetailsActivity"
+            android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

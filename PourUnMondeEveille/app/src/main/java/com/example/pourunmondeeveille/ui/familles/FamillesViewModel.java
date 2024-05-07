@@ -6,14 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 public class FamillesViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    public FamillesViewModel() {}
 
-    public FamillesViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is familles fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
-    }
 }
