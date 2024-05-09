@@ -32,7 +32,6 @@ public class FamillesFragment extends Fragment {
     private EditText barreDeRecherche;
     private List<String> familles;
     private ArrayAdapter<String> adapter;
-    private Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class FamillesFragment extends Fragment {
         binding = FragmentFamillesBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        context = view.getContext();
         famillesList = view.findViewById(R.id.famillesList);
         barreDeRecherche = view.findViewById(R.id.barreDeRecherche);
 
@@ -51,14 +49,14 @@ public class FamillesFragment extends Fragment {
         familles.add("Famille Martin");
         familles.add("Famille Lefebvre");
 
-        adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, familles);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, familles);
         famillesList.setAdapter(adapter);
 
         famillesList.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
             String familleSelectionnee = familles.get(position);
-            Intent intent = new Intent(context, FamilleDetailsActivity.class);
+            Intent intent = new Intent(getContext(), FamilleDetailsActivity.class);
             intent.putExtra("NOM_DE_FAMILLE", familleSelectionnee);
-            context.startActivity(intent);
+            getContext().startActivity(intent);
         });
 
         barreDeRecherche.addTextChangedListener(new TextWatcher() {
@@ -67,11 +65,20 @@ public class FamillesFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<String> filteredList = familles.stream()
-                        .filter(name -> name.toLowerCase().contains(s.toString().toLowerCase()))
-                        .collect(Collectors.toList());
+                List<String> filteredList = new ArrayList<>();
+                filteredList.add("Famille Dupont");
+                filteredList.add("Famille Martin");
+                filteredList.add("Famille Lefebvre");
+
+                if (s.length() > 0) {
+                    filteredList = filteredList.stream()
+                            .filter(name -> name.toLowerCase().contains(s.toString().toLowerCase()))
+                            .collect(Collectors.toList());
+                }
+
                 adapter.clear();
                 adapter.addAll(filteredList);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
