@@ -15,10 +15,12 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.databinding.FragmentFamillesBinding;
+import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
 import com.example.pourunmondeeveille.model.familles.FamilleDetailsActivity;
 
 import java.util.ArrayList;
@@ -30,8 +32,16 @@ public class FamillesFragment extends Fragment {
     private FragmentFamillesBinding binding;
     private ListView famillesList;
     private EditText barreDeRecherche;
-    private List<String> familles;
+    private List<String> nomFamilles;
     private ArrayAdapter<String> adapter;
+
+    public List<String> getNomFamilles() {
+        return nomFamilles;
+    }
+
+    public void setNomFamilles(List<String> nomFamilles) {
+        this.nomFamilles = nomFamilles;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -44,16 +54,22 @@ public class FamillesFragment extends Fragment {
         famillesList = view.findViewById(R.id.famillesList);
         barreDeRecherche = view.findViewById(R.id.barreDeRecherche);
 
-        familles = new ArrayList<>();
-        familles.add("Famille Dupont");
-        familles.add("Famille Martin");
-        familles.add("Famille Lefebvre");
+        FamillesViewModel viewModel = new ViewModelProvider(this).get(FamillesViewModel.class);
 
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, familles);
-        famillesList.setAdapter(adapter);
+        viewModel.getFamillesAccueil().observe(getViewLifecycleOwner(), new Observer<List<FamilleAccueil>>() {
+            @Override
+            public void onChanged(List<FamilleAccueil> familles) {
+                List<String> nomsDeFamille = getNomsDesPostulants(familles);
+                setNomFamilles(nomsDeFamille);
+                adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, nomsDeFamille);
+                famillesList.setAdapter(adapter);  // Met à jour l'adapter lorsque les données changent
+            }
+        });
+
+        viewModel.fetchFamillesAccueil();
 
         famillesList.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
-            String familleSelectionnee = familles.get(position);
+            String familleSelectionnee = nomFamilles.get(position);
             Intent intent = new Intent(getContext(), FamilleDetailsActivity.class);
             intent.putExtra("NOM_DE_FAMILLE", familleSelectionnee);
             getContext().startActivity(intent);
@@ -65,10 +81,7 @@ public class FamillesFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<String> filteredList = new ArrayList<>();
-                filteredList.add("Famille Dupont");
-                filteredList.add("Famille Martin");
-                filteredList.add("Famille Lefebvre");
+                List<String> filteredList = getNomFamilles();
 
                 if (s.length() > 0) {
                     filteredList = filteredList.stream()
@@ -85,8 +98,6 @@ public class FamillesFragment extends Fragment {
             public void afterTextChanged(Editable s) { }
         });
 
-
-
         return view;
     }
 
@@ -95,4 +106,18 @@ public class FamillesFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    public List<String> getNomsDesPostulants(List<FamilleAccueil> familles) {
+        List<String> nomsDesPostulants = new ArrayList<>();
+
+        for (FamilleAccueil famille : familles) {
+            if (famille.getPostulant() != null) {  // Vérifiez si le postulant existe
+                String nomPostulant = famille.getPostulant().getNom();
+                nomsDesPostulants.add(nomPostulant);  // Ajoutez le nom à la liste
+            }
+        }
+
+        return nomsDesPostulants;  // Retournez la liste des noms des postulants
+    }
+
 }
