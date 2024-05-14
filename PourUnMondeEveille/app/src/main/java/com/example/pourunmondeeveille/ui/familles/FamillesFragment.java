@@ -1,6 +1,5 @@
 package com.example.pourunmondeeveille.ui.familles;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,15 +31,25 @@ public class FamillesFragment extends Fragment {
     private FragmentFamillesBinding binding;
     private ListView famillesList;
     private EditText barreDeRecherche;
-    private List<String> nomFamilles;
+    private List<String> nomsFamilles;
     private ArrayAdapter<String> adapter;
 
-    public List<String> getNomFamilles() {
-        return nomFamilles;
+    private List<FamilleAccueil> clonedPostulants;
+
+    public List<FamilleAccueil> getClonedPostulants() {
+        return clonedPostulants;
     }
 
-    public void setNomFamilles(List<String> nomFamilles) {
-        this.nomFamilles = nomFamilles;
+    public void setClonedPostulants(List<FamilleAccueil> clonedPostulants) {
+        this.clonedPostulants = clonedPostulants;
+    }
+
+    public List<String> getNomsFamilles() {
+        return nomsFamilles;
+    }
+
+    public void setNomsFamilles(List<String> nomsFamilles) {
+        this.nomsFamilles = nomsFamilles;
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,17 +68,22 @@ public class FamillesFragment extends Fragment {
         viewModel.getFamillesAccueil().observe(getViewLifecycleOwner(), new Observer<List<FamilleAccueil>>() {
             @Override
             public void onChanged(List<FamilleAccueil> familles) {
-                List<String> nomsDeFamille = getNomsDesPostulants(familles);
-                setNomFamilles(nomsDeFamille);
+                try {
+                    getClonedPostulantsList(familles);
+                } catch (CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
+                }
+                List<String> nomsDeFamille = getNomsPostulantsList();
+                setNomsFamilles(nomsDeFamille);
                 adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, nomsDeFamille);
-                famillesList.setAdapter(adapter);  // Met à jour l'adapter lorsque les données changent
+                famillesList.setAdapter(adapter);
             }
         });
 
         viewModel.fetchFamillesAccueil();
 
         famillesList.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
-            String familleSelectionnee = nomFamilles.get(position);
+            String familleSelectionnee = nomsFamilles.get(position);
             Intent intent = new Intent(getContext(), FamilleDetailsActivity.class);
             intent.putExtra("NOM_DE_FAMILLE", familleSelectionnee);
             getContext().startActivity(intent);
@@ -77,25 +91,27 @@ public class FamillesFragment extends Fragment {
 
         barreDeRecherche.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<String> filteredList = getNomFamilles();
+                List<String> clonedFamillesList =  getNomsPostulantsList();
 
                 if (s.length() > 0) {
-                    filteredList = filteredList.stream()
+                    clonedFamillesList = clonedFamillesList.stream()
                             .filter(name -> name.toLowerCase().contains(s.toString().toLowerCase()))
                             .collect(Collectors.toList());
                 }
 
                 adapter.clear();
-                adapter.addAll(filteredList);
+                adapter.addAll(clonedFamillesList);
                 adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         return view;
@@ -107,17 +123,29 @@ public class FamillesFragment extends Fragment {
         binding = null;
     }
 
-    public List<String> getNomsDesPostulants(List<FamilleAccueil> familles) {
+    public List<String> getNomsPostulantsList() {
         List<String> nomsDesPostulants = new ArrayList<>();
 
-        for (FamilleAccueil famille : familles) {
-            if (famille.getPostulant() != null) {  // Vérifiez si le postulant existe
+        for (FamilleAccueil famille : getClonedPostulants()) {
+            if (famille.getPostulant() != null) {
                 String nomPostulant = famille.getPostulant().getNom();
-                nomsDesPostulants.add(nomPostulant);  // Ajoutez le nom à la liste
+                nomsDesPostulants.add(nomPostulant);
             }
         }
 
-        return nomsDesPostulants;  // Retournez la liste des noms des postulants
+        return nomsDesPostulants;
+    }
+
+    public List<FamilleAccueil> getClonedPostulantsList(List<FamilleAccueil> familles) throws CloneNotSupportedException {
+        List<FamilleAccueil> clonedPostulants = new ArrayList<>();
+
+        for (FamilleAccueil famille : familles) {
+            clonedPostulants.add((FamilleAccueil) famille.clone());
+        }
+
+        setClonedPostulants(clonedPostulants);
+
+        return clonedPostulants;
     }
 
 }

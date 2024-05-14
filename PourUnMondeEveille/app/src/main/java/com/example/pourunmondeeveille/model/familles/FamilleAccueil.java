@@ -1,6 +1,6 @@
 package com.example.pourunmondeeveille.model.familles;
 
-public class FamilleAccueil {
+public class FamilleAccueil implements Cloneable {
     private int Enfant_Age_Min;  // Correspond au champ 'Enfant_Age_Min'
     private int Enfant_Age_Max;  // Correspond au champ 'Enfant_Age_Max'
     private int Nbre_Enfant_Voulu;  // Correspond au champ 'Nbre_Enfant_Voulu'
@@ -88,5 +88,9 @@ public class FamilleAccueil {
                 ", statutF='" + statutF + '\'' +
                 ", postulant=" + postulant +
                 '}';
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
