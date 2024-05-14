@@ -8,6 +8,7 @@ import com.example.pourunmondeeveille.bd.ApiService;
 import com.example.pourunmondeeveille.bd.RetrofitClient;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,15 +19,26 @@ import retrofit2.Retrofit;
 public class FamillesViewModel extends ViewModel {
     private ApiService apiService;
 
-    private final MutableLiveData<List<FamilleAccueil>> famillesAccueil = new MutableLiveData<>();
+    private final MutableLiveData<List<FamilleAccueil>> famillesAccueilLiveData = new MutableLiveData<>();
+    private List<FamilleAccueil> famillesList = new ArrayList<>();
+    private List<FamilleAccueil> originalFamillesList = new ArrayList<>();
+    public void setFamillesAccueilLiveData(List<FamilleAccueil> familles) {
+        famillesList = familles;
+        originalFamillesList = new ArrayList<>(familles); // Met à jour la liste originale
+        famillesAccueilLiveData.setValue(familles);
+    }
+
+    public List<FamilleAccueil> getOriginalFamillesList() {
+        return originalFamillesList;
+    }
 
     public FamillesViewModel() {
         Retrofit retrofit = RetrofitClient.getInstance();
         apiService = retrofit.create(ApiService.class);
     }
 
-    public LiveData<List<FamilleAccueil>> getFamillesAccueil() {
-        return famillesAccueil;  // Retourne le LiveData pour que le Fragment puisse s'abonner
+    public LiveData<List<FamilleAccueil>> getFamillesAccueilLiveData() {
+        return famillesAccueilLiveData;  // Retourne le LiveData pour que le Fragment puisse s'abonner
     }
 
     public void fetchFamillesAccueil() {
@@ -36,7 +48,7 @@ public class FamillesViewModel extends ViewModel {
             public void onResponse(Call<List<FamilleAccueil>> call, Response<List<FamilleAccueil>> response) {
                 if (response.isSuccessful()) {
                     List<FamilleAccueil> familles = response.body();
-                    famillesAccueil.setValue(familles);  // Met à jour le MutableLiveData
+                    setFamillesAccueilLiveData(familles);
                 } else {
                     // Gérez les erreurs de réponse
                 }
