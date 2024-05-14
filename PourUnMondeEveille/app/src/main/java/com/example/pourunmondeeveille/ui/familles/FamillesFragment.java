@@ -14,16 +14,20 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.databinding.FragmentFamillesBinding;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
-import com.example.pourunmondeeveille.model.familles.FamilleDetailsActivity;
+import com.example.pourunmondeeveille.ui.creationcompte.CreationCompteFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FamillesFragment extends Fragment {
@@ -83,10 +87,9 @@ public class FamillesFragment extends Fragment {
         viewModel.fetchFamillesAccueil();
 
         famillesList.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
-            String familleSelectionnee = nomsFamilles.get(position);
-            Intent intent = new Intent(getContext(), FamilleDetailsActivity.class);
-            intent.putExtra("NOM_DE_FAMILLE", familleSelectionnee);
-            getContext().startActivity(intent);
+            String nomFamilleSelectionnee = nomsFamilles.get(position);
+            naviguerAuFragmentProfileFamille(nomFamilleSelectionnee);
+
         });
 
         barreDeRecherche.addTextChangedListener(new TextWatcher() {
@@ -146,6 +149,16 @@ public class FamillesFragment extends Fragment {
         setClonedPostulants(clonedPostulants);
 
         return clonedPostulants;
+    }
+
+    private void naviguerAuFragmentProfileFamille(String nomDeFamille) {
+        // Ajout des informations de la famille
+        Bundle args = new Bundle();
+        args.putString("nomDeFamille", nomDeFamille);
+
+        // Navigation au fragment du profile de la famille
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+        navController.navigate(R.id.action_specific_to_profileFamilleFragment, args);
     }
 
 }

@@ -30,7 +30,7 @@
         <activity android:name=".PageAccueilActivity"
             android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
         </activity>
-        <activity android:name=".model.familles.FamilleDetailsActivity"
+        <activity android:name=".ui.familles.ProfileFamilleFragment"
             android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
         </activity>
     </application>

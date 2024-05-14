@@ -6,6 +6,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".PageAccueilActivity">
 
+    <FrameLayout
+        android:id="@+id/contenu_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <LinearLayout
         android:id="@+id/contenu_accueil"
         android:layout_width="match_parent"
@@ -48,12 +54,5 @@
             android:text="@string/creation_compte" />
 
     </LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/contenu_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
 
 </LinearLayout>
