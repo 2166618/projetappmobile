@@ -1,15 +1,183 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- res/layout/fragment_profile_famille.xml -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.familles.ProfileFamilleFragment">
 
-    <TextView
-        android:id="@+id/nomDeFamille"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"/>
-</RelativeLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Section Image et Nom de la famille -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/material_dynamic_primary80"
+            android:padding="16dp">
+
+            <!-- Image de la famille -->
+            <ImageView
+                android:id="@+id/imageFamille"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:maxHeight="200dp"
+                android:contentDescription="Image de la famille"
+                android:scaleType="centerCrop"
+                android:src="@drawable/famille" />
+
+            <!-- Nom de la famille -->
+            <TextView
+                android:id="@+id/nomFamille"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nom de la famille"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Statut de la famille -->
+            <TextView
+                android:id="@+id/statutFamille"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="En attente"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_red_dark" />
+        </LinearLayout>
+
+        <!-- Section Informations de base -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/material_dynamic_primary50"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Informations de base"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Adresse :"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/adresseFamille"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="123 Rue Exemple, Ville, Pays"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Numéro de téléphone :"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/telephoneFamille"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+123 456 789"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Section Informations supplémentaires -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/holo_orange_light"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Informations supplémentaires"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Langues :"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/languesFamille"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Français, Anglais"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Nationalité :"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/nationaliteFamille"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Française"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Religion :"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/religionFamille"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Catholique"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Section Enfants adoptés -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/material_dynamic_tertiary80"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enfants adoptés:"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/enfantAdoptesEtDateAdoption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

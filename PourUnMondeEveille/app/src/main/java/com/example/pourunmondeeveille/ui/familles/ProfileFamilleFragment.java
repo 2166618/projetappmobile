@@ -49,7 +49,7 @@ public class ProfileFamilleFragment extends Fragment {
         binding = FragmentProfileFamilleBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        TextView nomDeFamilleTextView = view.findViewById(R.id.nomDeFamille);
+        TextView nomDeFamilleTextView = view.findViewById(R.id.nomFamille);
         nomDeFamilleTextView.setText(getNom());
 
         return view;
