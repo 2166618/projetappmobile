@@ -49,7 +49,7 @@ public class ConnexionFragment extends Fragment {
                     // Réponse null signifie échec ou erreur
                     Toast.makeText(getContext(), "Erreur lors de la connexion", Toast.LENGTH_SHORT).show();
                 } else if (connexionResponse.getId() > 0) {
-                    // Connexion réussie, id valide
+                    // Connexion réussie
                     Toast.makeText(getContext(), "Connexion réussie!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);

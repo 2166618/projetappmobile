@@ -31,7 +31,9 @@ public class FamillesFragment extends Fragment {
     private FamillesViewModel famillesViewModel;
     private FragmentFamillesBinding binding;
     private ListView famillesListView;
-    private List<FamilleAccueil> clonedFamillesList;
+    private List<FamilleAccueil> clonedFamillesList = new ArrayList<>();
+    private List<String> nomsDeFamille = new ArrayList<>();
+    private List<String> filteredNomsDeFamille = new ArrayList<>();
     private ArrayAdapter<String> adapter;
 
     public List<FamilleAccueil> getClonedFamillesList() {
@@ -48,6 +50,7 @@ public class FamillesFragment extends Fragment {
         famillesViewModel = new ViewModelProvider(this).get(FamillesViewModel.class);
     }
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -59,20 +62,21 @@ public class FamillesFragment extends Fragment {
 
         famillesViewModel.fetchFamillesAccueil();
 
-        List<String> nomsDeFamille = getNomsDesFamilles();
-        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, nomsDeFamille);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, filteredNomsDeFamille);
+        famillesListView.setAdapter(adapter);
 
         famillesViewModel.getFamillesAccueilLiveData().observe(getViewLifecycleOwner(), new Observer<List<FamilleAccueil>>() {
             @Override
             public void onChanged(List<FamilleAccueil> familles) {
-                List<String> nomsDeFamille = getNomsDesFamilles();
-                adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, nomsDeFamille);
-                famillesListView.setAdapter(adapter);
+                nomsDeFamille = getNomsDesFamilles();
+                filteredNomsDeFamille.clear();
+                filteredNomsDeFamille.addAll(nomsDeFamille);
+                adapter.notifyDataSetChanged();
             }
         });
 
         famillesListView.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
-            String nomFamilleSelectionnee = getNomsDesFamilles().get(position);
+            String nomFamilleSelectionnee = filteredNomsDeFamille.get(position);
             naviguerAuFragmentProfileFamille(nomFamilleSelectionnee);
         });
 
@@ -83,22 +87,7 @@ public class FamillesFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    getClonedPostulantsList();
-                } catch (CloneNotSupportedException e) {
-                    throw new RuntimeException(e);
-                }
-                List<String> clonedFamillesList =  getNomsPostulantsList();
-
-                if (s.length() > 0) {
-                    clonedFamillesList = clonedFamillesList.stream()
-                            .filter(name -> name.toLowerCase().contains(s.toString().toLowerCase()))
-                            .collect(Collectors.toList());
-                }
-
-                adapter.clear();
-                adapter.addAll(clonedFamillesList);
-                adapter.notifyDataSetChanged();
+                filterNomsDeFamille(s.toString());
             }
 
             @Override
@@ -108,8 +97,6 @@ public class FamillesFragment extends Fragment {
 
         return view;
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -123,44 +110,46 @@ public class FamillesFragment extends Fragment {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
-        List<String> nomsDeFamille = getNomsPostulantsList();
-        return nomsDeFamille;
+        return getNomsPostulantsList();
     }
 
     public List<String> getNomsPostulantsList() {
         List<String> nomsDesPostulants = new ArrayList<>();
-
         for (FamilleAccueil famille : getClonedFamillesList()) {
             if (famille.getPostulant() != null) {
                 String nomPostulant = famille.getPostulant().getNom();
                 nomsDesPostulants.add(nomPostulant);
             }
         }
-
         return nomsDesPostulants;
     }
 
     public List<FamilleAccueil> getClonedPostulantsList() throws CloneNotSupportedException {
         List<FamilleAccueil> familles = famillesViewModel.getOriginalFamillesList();
         List<FamilleAccueil> clonedPostulants = new ArrayList<>();
-
         for (FamilleAccueil famille : familles) {
             clonedPostulants.add((FamilleAccueil) famille.clone());
         }
-
         setClonedFamillesList(clonedPostulants);
-
         return clonedPostulants;
     }
 
+    private void filterNomsDeFamille(String query) {
+        List<String> filteredList = new ArrayList<>(nomsDeFamille);
+        if (!query.isEmpty()) {
+            filteredList = filteredList.stream()
+                    .filter(name -> name.toLowerCase().contains(query.toLowerCase()))
+                    .collect(Collectors.toList());
+        }
+        filteredNomsDeFamille.clear();
+        filteredNomsDeFamille.addAll(filteredList);
+        adapter.notifyDataSetChanged();
+    }
+
     private void naviguerAuFragmentProfileFamille(String nomDeFamille) {
-        // Ajout des informations de la famille
         Bundle args = new Bundle();
         args.putString("nomDeFamille", nomDeFamille);
-
-        // Navigation au fragment du profile de la famille
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.action_specific_to_profileFamilleFragment, args);
     }
-
 }
