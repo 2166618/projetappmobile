@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -35,6 +36,7 @@ public class FamillesFragment extends Fragment {
     private List<String> nomsDeFamille = new ArrayList<>();
     private List<String> filteredNomsDeFamille = new ArrayList<>();
     private ArrayAdapter<String> adapter;
+    private CheckBox checkBoxFiltreStatut;
 
     public List<FamilleAccueil> getClonedFamillesList() {
         return clonedFamillesList;
@@ -59,6 +61,7 @@ public class FamillesFragment extends Fragment {
 
         famillesListView = view.findViewById(R.id.famillesList);
         EditText barreDeRecherche = view.findViewById(R.id.barreDeRecherche);
+        checkBoxFiltreStatut = view.findViewById(R.id.enAttenteAccueilCheckBox);
 
         famillesViewModel.fetchFamillesAccueil();
 
@@ -69,9 +72,7 @@ public class FamillesFragment extends Fragment {
             @Override
             public void onChanged(List<FamilleAccueil> familles) {
                 nomsDeFamille = getNomsDesFamilles();
-                filteredNomsDeFamille.clear();
-                filteredNomsDeFamille.addAll(nomsDeFamille);
-                adapter.notifyDataSetChanged();
+                applyFilters();
             }
         });
 
@@ -87,13 +88,15 @@ public class FamillesFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterNomsDeFamille(s.toString());
+                applyFilters();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
+
+        checkBoxFiltreStatut.setOnCheckedChangeListener((buttonView, isChecked) -> applyFilters());
 
         return view;
     }
@@ -134,13 +137,29 @@ public class FamillesFragment extends Fragment {
         return clonedPostulants;
     }
 
-    private void filterNomsDeFamille(String query) {
+    private void applyFilters() {
+        String query = binding.barreDeRecherche.getText().toString();
+        boolean filterByStatut = checkBoxFiltreStatut.isChecked();
+
         List<String> filteredList = new ArrayList<>(nomsDeFamille);
+
+        if (filterByStatut) {
+            filteredList = clonedFamillesList.stream()
+                    .filter(famille -> famille.getStatutF() == 1)
+                    .map(famille -> famille.getPostulant().getNom())
+                    .collect(Collectors.toList());
+        } else {
+            filteredList = clonedFamillesList.stream()
+                    .map(famille -> famille.getPostulant().getNom())
+                    .collect(Collectors.toList());
+        }
+
         if (!query.isEmpty()) {
             filteredList = filteredList.stream()
                     .filter(name -> name.toLowerCase().contains(query.toLowerCase()))
                     .collect(Collectors.toList());
         }
+
         filteredNomsDeFamille.clear();
         filteredNomsDeFamille.addAll(filteredList);
         adapter.notifyDataSetChanged();

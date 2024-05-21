@@ -1,21 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.familles.FamillesFragment">
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <!-- EditText pour la barre de recherche -->
     <EditText
         android:id="@+id/barreDeRecherche"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Rechercher..." />
+        android:hint="Rechercher" />
 
+    <!-- CheckBox pour filtrer par statut -->
+    <CheckBox
+        android:id="@+id/enAttenteAccueilCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/en_attente_accueil" />
+
+    <!-- ListView pour afficher les familles -->
     <ListView
         android:id="@+id/famillesList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/barreDeRecherche"
-        android:layout_marginTop="8dp" />
-</RelativeLayout>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+
+</LinearLayout>

@@ -7,7 +7,7 @@ public class FamilleAccueil implements Cloneable {
     private String langueF;  // Correspond au champ 'langueF'
     private String nationaliteF;  // Correspond au champ 'nationaliteF'
     private String religionF;  // Correspond au champ 'religionF'
-    private String statutF;  // Correspond au champ 'statutF'
+    private int statutF;  // Correspond au champ 'statutF'
     private Postulant postulant;  // Correspond au champ imbriqué 'postulant'
 
     // Getters et setters pour chaque champ
@@ -59,11 +59,11 @@ public class FamilleAccueil implements Cloneable {
         this.religionF = religionF;
     }
 
-    public String getStatutF() {
+    public int getStatutF() {
         return statutF;
     }
 
-    public void setStatutF(String statutF) {
+    public void setStatutF(int statutF) {
         this.statutF = statutF;
     }
 
