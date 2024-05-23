@@ -10,7 +10,7 @@
     <string name="nav_titre">Bonjour Intervenant</string>
     <string name="nav_sous_titre">OBNL Monde Éveillé - Québec</string>
 
-    <string name="nav_tableau_de_bord">Tableau de bord</string>
+    <string name="nav_a_propos">À propos</string>
     <string name="nav_familles">Familles</string>
     <string name="nav_enfants">Enfants</string>
     <string name="nav_modifier_informations_compte">Modifier les informations du compte</string>

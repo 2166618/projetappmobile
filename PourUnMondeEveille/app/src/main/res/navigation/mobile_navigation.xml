@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_tableau_de_bord"
-        android:name="com.example.pourunmondeeveille.ui.tableaudebord.TableauDeBordFragment"
-        android:label="@string/nav_tableau_de_bord"
-        tools:layout="@layout/fragment_tableau_de_bord" />
+        android:name="com.example.pourunmondeeveille.ui.apropos.AProposFragment"
+        android:label="@string/nav_a_propos"
+        tools:layout="@layout/fragment_a_propos" />
 
     <fragment
         android:id="@+id/nav_familles"
@@ -27,11 +27,6 @@
         android:label="@string/nav_enfants"
         tools:layout="@layout/fragment_enfants" />
 
-    <fragment
-        android:id="@+id/nav_modifier_informations_compte"
-        android:name="com.example.pourunmondeeveille.ui.enfants.EnfantFragment"
-        android:label="@string/nav_modifier_informations_compte"
-        tools:layout="@layout/fragment_enfants" />
     <fragment
         android:id="@+id/profileFamilleFragment"
         android:name="com.example.pourunmondeeveille.ui.familles.ProfileFamilleFragment"

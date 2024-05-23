@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tableaudebord.TableauDeBordFragment">
+    tools:context=".ui.apropos.AProposFragment">
 
     <TextView
-        android:id="@+id/text_tableau_de_bord"
+        android:id="@+id/text_a_propos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
