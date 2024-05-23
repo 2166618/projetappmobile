@@ -71,7 +71,12 @@ public class FamillesFragment extends Fragment {
         famillesViewModel.getFamillesAccueilLiveData().observe(getViewLifecycleOwner(), new Observer<List<FamilleAccueil>>() {
             @Override
             public void onChanged(List<FamilleAccueil> familles) {
-                nomsDeFamille = getNomsDesFamilles();
+                try {
+                    initializeClonedFamillesList();
+                    nomsDeFamille = getNomsDeFamillesList();
+                } catch (CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
+                }
                 applyFilters();
             }
         });
@@ -107,16 +112,7 @@ public class FamillesFragment extends Fragment {
         binding = null;
     }
 
-    private List<String> getNomsDesFamilles() {
-        try {
-            getClonedPostulantsList();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException(e);
-        }
-        return getNomsPostulantsList();
-    }
-
-    public List<String> getNomsPostulantsList() {
+    public List<String> getNomsDeFamillesList() {
         List<String> nomsDesPostulants = new ArrayList<>();
         for (FamilleAccueil famille : getClonedFamillesList()) {
             if (famille.getPostulant() != null) {
@@ -127,14 +123,14 @@ public class FamillesFragment extends Fragment {
         return nomsDesPostulants;
     }
 
-    public List<FamilleAccueil> getClonedPostulantsList() throws CloneNotSupportedException {
+    public List<FamilleAccueil> initializeClonedFamillesList() throws CloneNotSupportedException {
         List<FamilleAccueil> familles = famillesViewModel.getOriginalFamillesList();
-        List<FamilleAccueil> clonedPostulants = new ArrayList<>();
+        List<FamilleAccueil> clonedFamilles = new ArrayList<>();
         for (FamilleAccueil famille : familles) {
-            clonedPostulants.add((FamilleAccueil) famille.clone());
+            clonedFamilles.add((FamilleAccueil) famille.clone());
         }
-        setClonedFamillesList(clonedPostulants);
-        return clonedPostulants;
+        setClonedFamillesList(clonedFamilles);
+        return clonedFamilles;
     }
 
     private void applyFilters() {
