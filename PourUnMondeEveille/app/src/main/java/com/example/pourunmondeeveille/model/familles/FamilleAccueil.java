@@ -1,16 +1,16 @@
 package com.example.pourunmondeeveille.model.familles;
 
 public class FamilleAccueil implements Cloneable {
-    private int Enfant_Age_Min;  // Correspond au champ 'Enfant_Age_Min'
-    private int Enfant_Age_Max;  // Correspond au champ 'Enfant_Age_Max'
-    private int Nbre_Enfant_Voulu;  // Correspond au champ 'Nbre_Enfant_Voulu'
-    private String langueF;  // Correspond au champ 'langueF'
-    private String nationaliteF;  // Correspond au champ 'nationaliteF'
-    private String religionF;  // Correspond au champ 'religionF'
-    private int statutF;  // Correspond au champ 'statutF'
-    private Postulant postulant;  // Correspond au champ imbriqué 'postulant'
+    private int Enfant_Age_Min;
+    private int Enfant_Age_Max;
+    private int Nbre_Enfant_Voulu;
+    private Langue langue;
+    private Nationalite nationalite;
+    private Religion religion;
 
-    // Getters et setters pour chaque champ
+    private StatutF statutF;
+    private Postulant postulant;
+
     public int getEnfant_Age_Min() {
         return Enfant_Age_Min;
     }
@@ -35,36 +35,36 @@ public class FamilleAccueil implements Cloneable {
         Nbre_Enfant_Voulu = nbre_Enfant_Voulu;
     }
 
-    public String getLangueF() {
-        return langueF;
+    public Langue getLangue() {
+        return langue;
     }
 
-    public void setLangueF(String langueF) {
-        this.langueF = langueF;
+    public void setLangue(Langue langue) {
+        this.langue = langue;
     }
 
-    public String getNationaliteF() {
-        return nationaliteF;
+    public Nationalite getNationalite() {
+        return nationalite;
     }
 
-    public void setNationaliteF(String nationaliteF) {
-        this.nationaliteF = nationaliteF;
+    public void setNationalite(Nationalite nationalite) {
+        this.nationalite = nationalite;
     }
 
-    public String getReligionF() {
-        return religionF;
+    public Religion getReligion() {
+        return religion;
     }
 
-    public void setReligionF(String religionF) {
-        this.religionF = religionF;
-    }
-
-    public int getStatutF() {
+    public StatutF getStatutF() {
         return statutF;
     }
 
-    public void setStatutF(int statutF) {
+    public void setStatutF(StatutF statutF) {
         this.statutF = statutF;
+    }
+
+    public void setReligion(Religion religion) {
+        this.religion = religion;
     }
 
     public Postulant getPostulant() {
@@ -75,17 +75,16 @@ public class FamilleAccueil implements Cloneable {
         this.postulant = postulant;
     }
 
-    // Ajoutez une méthode toString pour l'affichage ou le débogage
     @Override
     public String toString() {
         return "FamilleAccueil{" +
                 "Enfant_Age_Min=" + Enfant_Age_Min +
                 ", Enfant_Age_Max=" + Enfant_Age_Max +
                 ", Nbre_Enfant_Voulu=" + Nbre_Enfant_Voulu +
-                ", langueF='" + langueF + '\'' +
-                ", nationaliteF='" + nationaliteF + '\'' +
-                ", religionF='" + religionF + '\'' +
-                ", statutF='" + statutF + '\'' +
+                ", langue=" + langue +
+                ", nationalite=" + nationalite +
+                ", religion=" + religion +
+                ", statutF=" + statutF +
                 ", postulant=" + postulant +
                 '}';
     }

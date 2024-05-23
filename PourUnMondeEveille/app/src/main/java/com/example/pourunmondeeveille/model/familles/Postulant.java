@@ -1,10 +1,15 @@
 package com.example.pourunmondeeveille.model.familles;
 
 public class Postulant {
-    private String nom;  // Correspond au champ 'nom' dans le serializer
-    private String prenom;  // Correspond au champ 'prenom'
+    private String nom;
+    private String prenom;
+    private String telephone;
+    private String adresse;
+    private String ville;
+    private String province;
+    private String code_postal;
+    private int Nbre_enfant;
 
-    // Getters et setters pour chaque champ
     public String getNom() {
         return nom;
     }
@@ -21,9 +26,65 @@ public class Postulant {
         this.prenom = prenom;
     }
 
-    // Ajoutez une méthode toString pour l'affichage
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCode_postal() {
+        return code_postal;
+    }
+
+    public void setCode_postal(String code_postal) {
+        this.code_postal = code_postal;
+    }
+
+    public int getNbre_enfant() {
+        return Nbre_enfant;
+    }
+
+    public void setNbre_enfant(int nbre_enfant) {
+        Nbre_enfant = nbre_enfant;
+    }
+
     @Override
     public String toString() {
-        return nom + " " + prenom;  // Ajustez selon vos besoins
+        return "Postulant{" +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", ville='" + ville + '\'' +
+                ", province='" + province + '\'' +
+                ", code_postal='" + code_postal + '\'' +
+                ", Nbre_enfant=" + Nbre_enfant +
+                '}';
     }
 }

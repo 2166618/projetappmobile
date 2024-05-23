@@ -145,7 +145,7 @@ public class FamillesFragment extends Fragment {
 
         if (filterByStatut) {
             filteredList = clonedFamillesList.stream()
-                    .filter(famille -> famille.getStatutF() == 1)
+                    .filter(famille -> famille.getStatutF().getId() == 1)
                     .map(famille -> famille.getPostulant().getNom())
                     .collect(Collectors.toList());
         } else {
