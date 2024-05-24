@@ -55,7 +55,7 @@ public class ConnexionFragment extends Fragment {
         motDePasseEditText = view.findViewById(R.id.editTextPassword);
 
         // Initialiser Facebook SDK (si pas déjà initialisé)
-        FacebookSdk.sdkInitialize(getApplicationContext());
+        // FacebookSdk.sdkInitialize(getApplicationContext());
 
         // Initialiser CallbackManager
         callbackManager = CallbackManager.Factory.create();
@@ -89,6 +89,7 @@ public class ConnexionFragment extends Fragment {
                 Toast.makeText(getContext(), "Erreur lors de la connexion", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         // Observateur unique pour la connexion
         connexionViewModel.getConnexionResponse().observe(getViewLifecycleOwner(), new Observer<ConnexionResponse>() {
@@ -150,6 +151,12 @@ public class ConnexionFragment extends Fragment {
         // Validation de la transaction
         transaction.commit();
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 }
