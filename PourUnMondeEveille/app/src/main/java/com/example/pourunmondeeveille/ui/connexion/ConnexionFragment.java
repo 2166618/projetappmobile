@@ -1,5 +1,7 @@
 package com.example.pourunmondeeveille.ui.connexion;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,11 +21,22 @@ import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.bd.ApiService;
 import com.example.pourunmondeeveille.model.ConnexionResponse;
 import com.example.pourunmondeeveille.ui.creationcompte.CreationCompteFragment;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+import java.util.Arrays;
 
 public class ConnexionFragment extends Fragment {
     private ConnexionViewModel connexionViewModel;
+    private LoginButton loginButton;
     private EditText nomUtilisateurEditText;
     private EditText motDePasseEditText;
+    private CallbackManager callbackManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +53,42 @@ public class ConnexionFragment extends Fragment {
         Button btnCreationCompte = view.findViewById(R.id.btnCreationCompte);
         nomUtilisateurEditText = view.findViewById(R.id.editTextNomUtilisateur);
         motDePasseEditText = view.findViewById(R.id.editTextPassword);
+
+        // Initialiser Facebook SDK (si pas déjà initialisé)
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        // Initialiser CallbackManager
+        callbackManager = CallbackManager.Factory.create();
+
+        // Configurer le LoginButton
+        loginButton = view.findViewById(R.id.login_button);
+        loginButton.setPermissions("email", "public_profile");
+
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // Connexion réussie
+                // AccessToken accessToken = loginResult.getAccessToken();
+                Toast.makeText(getContext(), "Connexion réussie!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                // Utiliser accessToken pour faire des requêtes ou pour récupérer des infos utilisateur
+            }
+
+            @Override
+            public void onCancel() {
+                // Connexion annulée
+                // Réponse null signifie échec ou erreur
+                Toast.makeText(getContext(), "Connexion cancellé", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // Erreur de connexion
+                // Réponse null signifie échec ou erreur
+                Toast.makeText(getContext(), "Erreur lors de la connexion", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         // Observateur unique pour la connexion
         connexionViewModel.getConnexionResponse().observe(getViewLifecycleOwner(), new Observer<ConnexionResponse>() {
