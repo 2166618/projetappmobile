@@ -68,11 +68,11 @@ public class ConnexionFragment extends Fragment {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // Connexion réussie
-                // AccessToken accessToken = loginResult.getAccessToken();
                 Toast.makeText(getContext(), "Connexion réussie!", Toast.LENGTH_SHORT).show();
+                AccessToken accessToken = loginResult.getAccessToken();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("accessToken", accessToken.getToken()); // Passer le jeton d'accès à MainActivity si nécessaire
                 startActivity(intent);
-                // Utiliser accessToken pour faire des requêtes ou pour récupérer des infos utilisateur
             }
 
             @Override
