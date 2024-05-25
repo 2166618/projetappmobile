@@ -12,21 +12,35 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.databinding.FragmentFamillesBinding;
 import com.example.pourunmondeeveille.databinding.FragmentProfileFamilleBinding;
+import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
 
 public class ProfileFamilleFragment extends Fragment {
-
     private FragmentProfileFamilleBinding binding;
-
+    private FamilleAccueil famille;
     private String nom;
+
+    public FragmentProfileFamilleBinding getBinding() {
+        return binding;
+    }
+
+    public void setBinding(FragmentProfileFamilleBinding binding) {
+        this.binding = binding;
+    }
+
+    public FamilleAccueil getFamille() {
+        return famille;
+    }
+
+    public void setFamille(FamilleAccueil famille) {
+        this.famille = famille;
+    }
 
     public String getNom() {
         return nom;
     }
-
     public void setNom(String nom) {
         this.nom = nom;
     }
-
     public ProfileFamilleFragment() {
 
     }
@@ -35,8 +49,8 @@ public class ProfileFamilleFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            String param1 = getArguments().getString("nomDeFamille");
-            setNom(param1);
+            FamilleAccueil familleSelectionnee = (FamilleAccueil) getArguments().getSerializable("familleSelectionnee");
+            setFamille(familleSelectionnee);
         }
     }
 
@@ -50,7 +64,7 @@ public class ProfileFamilleFragment extends Fragment {
         View view = binding.getRoot();
 
         TextView nomDeFamilleTextView = view.findViewById(R.id.nomFamille);
-        nomDeFamilleTextView.setText(getNom());
+        nomDeFamilleTextView.setText(getFamille().getPostulant().getNom());
 
         return view;
     }

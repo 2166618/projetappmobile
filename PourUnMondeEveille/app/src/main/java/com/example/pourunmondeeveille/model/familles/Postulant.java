@@ -1,6 +1,7 @@
 package com.example.pourunmondeeveille.model.familles;
 
 public class Postulant {
+    private int id;
     private String nom;
     private String prenom;
     private String telephone;
@@ -9,6 +10,10 @@ public class Postulant {
     private String province;
     private String code_postal;
     private int Nbre_enfant;
+
+    public int getId() {
+        return id;
+    }
 
     public String getNom() {
         return nom;
@@ -77,7 +82,8 @@ public class Postulant {
     @Override
     public String toString() {
         return "Postulant{" +
-                "nom='" + nom + '\'' +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", adresse='" + adresse + '\'' +

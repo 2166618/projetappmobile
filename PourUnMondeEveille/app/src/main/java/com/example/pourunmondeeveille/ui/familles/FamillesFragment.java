@@ -33,7 +33,7 @@ public class FamillesFragment extends Fragment {
     private FragmentFamillesBinding binding;
     private ListView famillesListView;
     private List<FamilleAccueil> clonedFamillesList = new ArrayList<>();
-    private List<String> nomsDeFamille = new ArrayList<>();
+    private List<Integer> filteredIdsDeFamille = new ArrayList<>();
     private List<String> filteredNomsDeFamille = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private CheckBox checkBoxFiltreStatut;
@@ -73,7 +73,6 @@ public class FamillesFragment extends Fragment {
             public void onChanged(List<FamilleAccueil> familles) {
                 try {
                     initializeClonedFamillesList();
-                    nomsDeFamille = getNomsDeFamillesList();
                 } catch (CloneNotSupportedException e) {
                     throw new RuntimeException(e);
                 }
@@ -82,8 +81,18 @@ public class FamillesFragment extends Fragment {
         });
 
         famillesListView.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
-            String nomFamilleSelectionnee = filteredNomsDeFamille.get(position);
-            naviguerAuFragmentProfileFamille(nomFamilleSelectionnee);
+            int idFamilleSelectionnee = filteredIdsDeFamille.get(position);
+            List<FamilleAccueil> tempList = null;
+            try {
+                tempList = initializeClonedFamillesList();
+            } catch (CloneNotSupportedException e) {
+                throw new RuntimeException(e);
+            }
+            FamilleAccueil familleSelectionnee = tempList.stream()
+                    .filter(famille -> famille.getId() == idFamilleSelectionnee)
+                    .findFirst()
+                    .orElse(null);
+            naviguerAuFragmentProfileFamille(familleSelectionnee);
         });
 
         barreDeRecherche.addTextChangedListener(new TextWatcher() {
@@ -112,17 +121,6 @@ public class FamillesFragment extends Fragment {
         binding = null;
     }
 
-    public List<String> getNomsDeFamillesList() {
-        List<String> nomsDesPostulants = new ArrayList<>();
-        for (FamilleAccueil famille : getClonedFamillesList()) {
-            if (famille.getPostulant() != null) {
-                String nomPostulant = famille.getPostulant().getNom();
-                nomsDesPostulants.add(nomPostulant);
-            }
-        }
-        return nomsDesPostulants;
-    }
-
     public List<FamilleAccueil> initializeClonedFamillesList() throws CloneNotSupportedException {
         List<FamilleAccueil> familles = famillesViewModel.getOriginalFamillesList();
         List<FamilleAccueil> clonedFamilles = new ArrayList<>();
@@ -137,33 +135,47 @@ public class FamillesFragment extends Fragment {
         String query = binding.barreDeRecherche.getText().toString();
         boolean filterByStatut = checkBoxFiltreStatut.isChecked();
 
-        List<String> filteredList = new ArrayList<>(nomsDeFamille);
+        List<String> filteredNomsList = new ArrayList<>();
+        List<Integer> filteredIdsList = new ArrayList<>();
 
         if (filterByStatut) {
-            filteredList = clonedFamillesList.stream()
+            filteredNomsList = clonedFamillesList.stream()
                     .filter(famille -> famille.getStatutF().getId() == 1)
                     .map(famille -> famille.getPostulant().getNom())
                     .collect(Collectors.toList());
+            filteredIdsList = clonedFamillesList.stream()
+                    .filter(famille -> famille.getStatutF().getId() == 1)
+                    .map(FamilleAccueil::getId)
+                    .collect(Collectors.toList());
         } else {
-            filteredList = clonedFamillesList.stream()
+            filteredNomsList = clonedFamillesList.stream()
                     .map(famille -> famille.getPostulant().getNom())
+                    .collect(Collectors.toList());
+            filteredIdsList = clonedFamillesList.stream()
+                    .map(FamilleAccueil::getId)
                     .collect(Collectors.toList());
         }
 
         if (!query.isEmpty()) {
-            filteredList = filteredList.stream()
+            filteredNomsList = filteredNomsList.stream()
                     .filter(name -> name.toLowerCase().contains(query.toLowerCase()))
+                    .collect(Collectors.toList());
+            filteredIdsList = clonedFamillesList.stream()
+                    .filter(famille -> famille.getPostulant().getNom().toLowerCase().contains(query.toLowerCase()))
+                    .map(FamilleAccueil::getId)
                     .collect(Collectors.toList());
         }
 
+        filteredIdsDeFamille.clear();
         filteredNomsDeFamille.clear();
-        filteredNomsDeFamille.addAll(filteredList);
+        filteredIdsDeFamille.addAll(filteredIdsList);
+        filteredNomsDeFamille.addAll(filteredNomsList);
         adapter.notifyDataSetChanged();
     }
 
-    private void naviguerAuFragmentProfileFamille(String nomDeFamille) {
+    private void naviguerAuFragmentProfileFamille(FamilleAccueil familleSelectionnee) {
         Bundle args = new Bundle();
-        args.putString("nomDeFamille", nomDeFamille);
+        args.putSerializable("familleSelectionnee", familleSelectionnee);
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.action_specific_to_profileFamilleFragment, args);
     }

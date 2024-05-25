@@ -1,6 +1,9 @@
 package com.example.pourunmondeeveille.model.familles;
 
-public class FamilleAccueil implements Cloneable {
+import java.io.Serializable;
+
+public class FamilleAccueil implements Cloneable, Serializable {
+    private int id;
     private int Enfant_Age_Min;
     private int Enfant_Age_Max;
     private int Nbre_Enfant_Voulu;
@@ -10,6 +13,10 @@ public class FamilleAccueil implements Cloneable {
 
     private StatutF statutF;
     private Postulant postulant;
+
+    public int getId() {
+        return id;
+    }
 
     public int getEnfant_Age_Min() {
         return Enfant_Age_Min;
@@ -78,7 +85,8 @@ public class FamilleAccueil implements Cloneable {
     @Override
     public String toString() {
         return "FamilleAccueil{" +
-                "Enfant_Age_Min=" + Enfant_Age_Min +
+                "id=" + id +
+                ", Enfant_Age_Min=" + Enfant_Age_Min +
                 ", Enfant_Age_Max=" + Enfant_Age_Max +
                 ", Nbre_Enfant_Voulu=" + Nbre_Enfant_Voulu +
                 ", langue=" + langue +
