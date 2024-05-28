@@ -24,8 +24,6 @@ public class AProposFragment extends Fragment {
         binding = FragmentAProposBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textAPropos;
-        AProposViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

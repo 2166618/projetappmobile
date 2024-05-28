@@ -29,6 +29,12 @@
 
 
 
+    <string name="logo_content_description">Logo de l\'organisation</string>
+    <string name="nom_de_l_organisation">Monde Éveillé</string>
+    <string name="OBNL">Organisation à but non lucratif</string>
+    <string name="mission">La mission est d\'accompagner tous les jeunes, âgés de 6 à 25 ans, dans leurs réalisations scolaires, sportives et professionnelles, au Canada et en Afrique.</string>
+    <string name="vision">La vision est que Monde Éveillé soit connu et reconnu comme un leader dans la communauté en tant qu\'acteur d\'influence positive et mobilisateur auprès des jeunes, favorisant ainsi l\'atteinte de leur plein potentiel. D\'ici 2027, Monde Éveillé souhaite avoir un impact auprès de 10 000 jeunes.</string>
+
 
 
 </resources>

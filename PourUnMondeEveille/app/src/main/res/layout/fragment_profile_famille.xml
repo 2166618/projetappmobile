@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="125dp"
                 android:maxHeight="200dp"
-                android:contentDescription="Image de la famille"
+                android:contentDescription="Image d'une famille unie"
                 android:scaleType="centerCrop"
                 android:src="@drawable/famille" />
 
