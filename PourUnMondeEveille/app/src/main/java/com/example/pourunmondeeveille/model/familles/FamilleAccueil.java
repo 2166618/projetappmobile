@@ -7,10 +7,9 @@ public class FamilleAccueil implements Cloneable, Serializable {
     private int Enfant_Age_Min;
     private int Enfant_Age_Max;
     private int Nbre_Enfant_Voulu;
-    private Langue langue;
-    private Nationalite nationalite;
-    private Religion religion;
-
+    private LangueF langueF;
+    private NationaliteF nationaliteF;
+    private ReligionF religionF;
     private StatutF statutF;
     private Postulant postulant;
 
@@ -42,24 +41,24 @@ public class FamilleAccueil implements Cloneable, Serializable {
         Nbre_Enfant_Voulu = nbre_Enfant_Voulu;
     }
 
-    public Langue getLangue() {
-        return langue;
+    public LangueF getLangue() {
+        return langueF;
     }
 
-    public void setLangue(Langue langue) {
-        this.langue = langue;
+    public void setLangue(LangueF langueF) {
+        this.langueF = langueF;
     }
 
-    public Nationalite getNationalite() {
-        return nationalite;
+    public NationaliteF getNationalite() {
+        return nationaliteF;
     }
 
-    public void setNationalite(Nationalite nationalite) {
-        this.nationalite = nationalite;
+    public void setNationalite(NationaliteF nationaliteF) {
+        this.nationaliteF = nationaliteF;
     }
 
-    public Religion getReligion() {
-        return religion;
+    public ReligionF getReligion() {
+        return religionF;
     }
 
     public StatutF getStatutF() {
@@ -70,8 +69,8 @@ public class FamilleAccueil implements Cloneable, Serializable {
         this.statutF = statutF;
     }
 
-    public void setReligion(Religion religion) {
-        this.religion = religion;
+    public void setReligion(ReligionF religionF) {
+        this.religionF = religionF;
     }
 
     public Postulant getPostulant() {
@@ -89,9 +88,9 @@ public class FamilleAccueil implements Cloneable, Serializable {
                 ", Enfant_Age_Min=" + Enfant_Age_Min +
                 ", Enfant_Age_Max=" + Enfant_Age_Max +
                 ", Nbre_Enfant_Voulu=" + Nbre_Enfant_Voulu +
-                ", langue=" + langue +
-                ", nationalite=" + nationalite +
-                ", religion=" + religion +
+                ", langue=" + langueF +
+                ", nationalite=" + nationaliteF +
+                ", religion=" + religionF +
                 ", statutF=" + statutF +
                 ", postulant=" + postulant +
                 '}';

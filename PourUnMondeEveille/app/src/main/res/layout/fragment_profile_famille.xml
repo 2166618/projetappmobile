@@ -47,8 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="En attente"
-                android:textSize="16sp"
-                android:textColor="@android:color/holo_red_dark" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
         <!-- Section Informations de base -->
@@ -116,11 +117,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Langues :"
+                android:text="Langue :"
                 android:textSize="16sp"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/languesFamille"
+                android:id="@+id/langueFamille"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Français, Anglais"
@@ -172,10 +173,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/enfantAdoptesEtDateAdoption"
+                android:id="@+id/enfantAdoptesAvecDateAdoption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Aucun enfant adopté"
                 android:textSize="16sp" />
         </LinearLayout>
 

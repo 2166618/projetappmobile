@@ -1,8 +1,8 @@
 package com.example.pourunmondeeveille.model.familles;
 
-public class Nationalite {
+public class ReligionF {
     private int id;
-    private String titre;
+    private String nom;
 
     public int getId() {
         return id;
@@ -12,19 +12,19 @@ public class Nationalite {
         this.id = id;
     }
 
-    public String getTitre() {
-        return titre;
+    public String getNom() {
+        return nom;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     @Override
     public String toString() {
-        return "Nationalite{" +
+        return "Religion{" +
                 "id=" + id +
-                ", titre='" + titre + '\'' +
+                ", nom='" + nom + '\'' +
                 '}';
     }
 }

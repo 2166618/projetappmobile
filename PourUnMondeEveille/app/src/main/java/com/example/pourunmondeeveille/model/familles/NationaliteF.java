@@ -1,8 +1,8 @@
 package com.example.pourunmondeeveille.model.familles;
 
-public class Langue {
+public class NationaliteF {
     private int id;
-    private String libele;
+    private String titre;
 
     public int getId() {
         return id;
@@ -12,19 +12,19 @@ public class Langue {
         this.id = id;
     }
 
-    public String getLibele() {
-        return libele;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setLibele(String libele) {
-        this.libele = libele;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     @Override
     public String toString() {
-        return "Langue{" +
+        return "Nationalite{" +
                 "id=" + id +
-                ", libele='" + libele + '\'' +
+                ", titre='" + titre + '\'' +
                 '}';
     }
 }
