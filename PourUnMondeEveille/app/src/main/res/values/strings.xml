@@ -17,6 +17,7 @@
 
     <string name="bienvenue">Bienvenue !</string>
     <string name="connexion">CONNEXION</string>
+    <string name="deconnexion">déconnexion</string>
     <string name="creation_compte">SE CRÉER UN COMPTE</string>
 
     <string name="authentification">Authentification</string>
