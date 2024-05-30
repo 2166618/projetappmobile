@@ -1,4 +1,4 @@
-package com.example.pourunmondeeveille.model;
+package com.example.pourunmondeeveille.model.connexion;
 
 import com.google.gson.annotations.SerializedName;
 

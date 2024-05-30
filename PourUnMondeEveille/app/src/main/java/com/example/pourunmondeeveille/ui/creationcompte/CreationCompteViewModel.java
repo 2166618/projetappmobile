@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.pourunmondeeveille.bd.ApiService;
 import com.example.pourunmondeeveille.bd.RetrofitClient;
-import com.example.pourunmondeeveille.model.Utilisateur;
+import com.example.pourunmondeeveille.model.connexion.Utilisateur;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

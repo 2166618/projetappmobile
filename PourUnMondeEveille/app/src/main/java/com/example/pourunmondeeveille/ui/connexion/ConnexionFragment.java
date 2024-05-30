@@ -16,8 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pourunmondeeveille.MainActivity;
 import com.example.pourunmondeeveille.R;
-import com.example.pourunmondeeveille.bd.ApiService;
-import com.example.pourunmondeeveille.model.ConnexionResponse;
+import com.example.pourunmondeeveille.model.connexion.ConnexionResponse;
 import com.example.pourunmondeeveille.ui.creationcompte.CreationCompteFragment;
 
 public class ConnexionFragment extends Fragment {

@@ -1,5 +1,9 @@
 package com.example.pourunmondeeveille.model.familles;
 
+import com.example.pourunmondeeveille.model.LangueF;
+import com.example.pourunmondeeveille.model.NationaliteF;
+import com.example.pourunmondeeveille.model.ReligionF;
+
 import java.io.Serializable;
 
 public class FamilleAccueil implements Cloneable, Serializable {

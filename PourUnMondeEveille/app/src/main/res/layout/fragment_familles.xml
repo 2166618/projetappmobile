@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp" />
+        android:divider="@drawable/side_nav_bar"
+        android:dividerHeight="4dp" />
 
 </LinearLayout>

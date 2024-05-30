@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.pourunmondeeveille.bd.ApiService;
 import com.example.pourunmondeeveille.bd.RetrofitClient;
-import com.example.pourunmondeeveille.model.ConnexionRequest;
-import com.example.pourunmondeeveille.model.ConnexionResponse;
+import com.example.pourunmondeeveille.model.connexion.ConnexionRequest;
+import com.example.pourunmondeeveille.model.connexion.ConnexionResponse;
 
 import java.io.IOException;
 

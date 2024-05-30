@@ -17,7 +17,7 @@
         android:theme="@style/Theme.PourUnMondeEveille"
         tools:targetApi="31">
         <activity
-            android:name=".PageAccueilActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".PageAccueilActivity"
             android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
         </activity>
         <activity android:name=".ui.familles.ProfileFamilleFragment"

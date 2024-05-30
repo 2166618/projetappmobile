@@ -1,4 +1,4 @@
-package com.example.pourunmondeeveille.model.familles;
+package com.example.pourunmondeeveille.model;
 
 public class LangueF {
     private int id;

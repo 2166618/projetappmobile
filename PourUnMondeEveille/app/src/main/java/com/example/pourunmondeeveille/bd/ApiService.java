@@ -1,8 +1,9 @@
 package com.example.pourunmondeeveille.bd;
 
-import com.example.pourunmondeeveille.model.ConnexionRequest;
-import com.example.pourunmondeeveille.model.ConnexionResponse;
-import com.example.pourunmondeeveille.model.Utilisateur;
+import com.example.pourunmondeeveille.model.connexion.ConnexionRequest;
+import com.example.pourunmondeeveille.model.connexion.ConnexionResponse;
+import com.example.pourunmondeeveille.model.connexion.Utilisateur;
+import com.example.pourunmondeeveille.model.enfants.Enfant;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
 
 import java.util.List;
@@ -21,7 +22,10 @@ public interface ApiService {
     @POST("users/create/")
     Call<ResponseBody> creerUtilisateur(@Body Utilisateur utilisateur);
 
-    @GET("/familles-accueil/")  // L'URL de votre endpoint
+    @GET("/familles-accueil/")
     Call<List<FamilleAccueil>> getFamillesAccueil();
+
+    @GET("/enfants/")
+    Call<List<Enfant>> getEnfants();
 
 }

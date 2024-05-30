@@ -19,7 +19,6 @@ import java.util.Objects;
 
 public class ProfileFamilleFragment extends Fragment {
     private FragmentProfileFamilleBinding binding;
-    //private FamilleAccueil famille;
     private String nom;
     private String statut;
     private String adresse;
@@ -37,14 +36,6 @@ public class ProfileFamilleFragment extends Fragment {
     public void setBinding(FragmentProfileFamilleBinding binding) {
         this.binding = binding;
     }
-
-//    public FamilleAccueil getFamille() {
-//        return famille;
-//    }
-//
-//    public void setFamille(FamilleAccueil famille) {
-//        this.famille = famille;
-//    }
 
     public ProfileFamilleFragment() {
 

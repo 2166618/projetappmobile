@@ -25,10 +25,19 @@
         android:id="@+id/nav_enfants"
         android:name="com.example.pourunmondeeveille.ui.enfants.EnfantFragment"
         android:label="@string/nav_enfants"
-        tools:layout="@layout/fragment_enfants" />
+        tools:layout="@layout/fragment_enfants">
+        <action
+            android:id="@+id/action_specific_to_profileEnfantFragment"
+            app:destination="@id/profileEnfantFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/profileFamilleFragment"
         android:name="com.example.pourunmondeeveille.ui.familles.ProfileFamilleFragment"
         android:label="Profile de la famille"/>
+
+    <fragment
+        android:id="@+id/profileEnfantFragment"
+        android:name="com.example.pourunmondeeveille.ui.enfants.ProfileEnfantFragment"
+        android:label="Profile de l'enfant"/>
 </navigation>
