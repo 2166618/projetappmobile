@@ -16,7 +16,7 @@
         android:id="@+id/nonPlaceCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/en_attente_accueil" />
+        android:text="Non placé" />
 
     <!-- ListView pour afficher les enfants -->
     <ListView
