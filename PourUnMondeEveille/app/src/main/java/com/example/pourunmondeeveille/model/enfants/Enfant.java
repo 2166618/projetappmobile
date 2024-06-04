@@ -1,16 +1,16 @@
 package com.example.pourunmondeeveille.model.enfants;
 
-import android.os.Build;
-
 import java.io.Serializable;
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.Period;
+
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Enfant implements Cloneable, Serializable {
     private int id;
     private String nom;
     private String prenom;
-    private LocalDate dateNaissance;
+    private String date_naissance;
     private String occupation;
     private String nationaliteE;
     private String religionE;
@@ -36,12 +36,12 @@ public class Enfant implements Cloneable, Serializable {
         this.prenom = prenom;
     }
 
-    public LocalDate getDateNaissance() {
-        return dateNaissance;
+    public String getDate_naissance() {
+        return date_naissance;
     }
 
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
+    public void setDate_naissance(String date_naissance) {
+        this.date_naissance = date_naissance;
     }
 
     public String getOccupation() {
@@ -84,14 +84,26 @@ public class Enfant implements Cloneable, Serializable {
         this.statutE = statutE;
     }
 
-    // Method to calculate age
     public int getAge() {
-        if (dateNaissance != null) {
-            LocalDate currentDate = LocalDate.now();
-            return Period.between(dateNaissance, currentDate).getYears();
-        } else {
-            return 0;
+        if (date_naissance != null && !date_naissance.isEmpty()) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date birthDate = sdf.parse(date_naissance);
+                Calendar birthDay = Calendar.getInstance();
+                birthDay.setTimeInMillis(birthDate.getTime());
+
+                Calendar today = Calendar.getInstance();
+                int age = today.get(Calendar.YEAR) - birthDay.get(Calendar.YEAR);
+
+                if (today.get(Calendar.DAY_OF_YEAR) < birthDay.get(Calendar.DAY_OF_YEAR)){
+                    age--;
+                }
+                return age;
+            } catch (Exception e) {
+                System.out.println("Erreur de format de date: " + e.getMessage());
+            }
         }
+        return 0; // Retourner 0 si date_naissance est nulle ou vide
     }
 
 
@@ -101,7 +113,7 @@ public class Enfant implements Cloneable, Serializable {
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
-                ", dateNaissance=" + dateNaissance +
+                ", dateNaissance=" + date_naissance +
                 ", occupation='" + occupation + '\'' +
                 ", nationaliteE='" + nationaliteE + '\'' +
                 ", religionE='" + religionE + '\'' +
