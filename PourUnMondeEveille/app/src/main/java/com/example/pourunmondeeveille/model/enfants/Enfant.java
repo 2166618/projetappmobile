@@ -1,13 +1,16 @@
 package com.example.pourunmondeeveille.model.enfants;
 
+import android.os.Build;
+
 import java.io.Serializable;
-import java.util.Date;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.Period;
 
 public class Enfant implements Cloneable, Serializable {
     private int id;
     private String nom;
     private String prenom;
-    private Date dateNaissance;
+    private LocalDate dateNaissance;
     private String occupation;
     private String nationaliteE;
     private String religionE;
@@ -33,11 +36,11 @@ public class Enfant implements Cloneable, Serializable {
         this.prenom = prenom;
     }
 
-    public Date getDateNaissance() {
+    public LocalDate getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(Date dateNaissance) {
+    public void setDateNaissance(LocalDate dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
@@ -80,6 +83,17 @@ public class Enfant implements Cloneable, Serializable {
     public void setStatutE(StatutE statutE) {
         this.statutE = statutE;
     }
+
+    // Method to calculate age
+    public int getAge() {
+        if (dateNaissance != null) {
+            LocalDate currentDate = LocalDate.now();
+            return Period.between(dateNaissance, currentDate).getYears();
+        } else {
+            return 0;
+        }
+    }
+
 
     @Override
     public String toString() {

@@ -121,7 +121,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/langueFamille"
+                android:id="@+id/langueEnfant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Français, Anglais"
@@ -135,7 +135,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/nationaliteFamille"
+                android:id="@+id/nationaliteEnfant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Française"
@@ -149,7 +149,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/religionFamille"
+                android:id="@+id/religionEnfant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Catholique"

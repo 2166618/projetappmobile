@@ -65,9 +65,6 @@ public class ProfileFamilleFragment extends Fragment {
         binding = FragmentProfileFamilleBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        // Gestion couleur statut
-
-
         TextView nomTextView = view.findViewById(R.id.nomFamille);
         TextView statutTextView = view.findViewById(R.id.statutFamille);
         TextView adresseTextView = view.findViewById(R.id.adresseFamille);
