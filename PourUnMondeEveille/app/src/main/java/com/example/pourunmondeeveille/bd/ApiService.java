@@ -2,6 +2,7 @@ package com.example.pourunmondeeveille.bd;
 
 import com.example.pourunmondeeveille.model.connexion.ConnexionRequest;
 import com.example.pourunmondeeveille.model.connexion.ConnexionResponse;
+import com.example.pourunmondeeveille.model.connexion.TokenResponse;
 import com.example.pourunmondeeveille.model.connexion.Utilisateur;
 import com.example.pourunmondeeveille.model.enfants.Enfant;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
@@ -16,10 +17,10 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
-    @POST("auth/login/")  // Endpoint pour la connexion
-    Call<ConnexionResponse> connexion(@Body ConnexionRequest request);
+    @POST("/api/token/")  // Endpoint pour la connexion
+    Call<TokenResponse> connexion(@Body ConnexionRequest request);
 
-    @POST("users/create/")
+    @POST("/users/create/")
     Call<ResponseBody> creerUtilisateur(@Body Utilisateur utilisateur);
 
     @GET("/familles-accueil/")

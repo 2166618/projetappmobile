@@ -1,5 +1,6 @@
 package com.example.pourunmondeeveille.ui.connexion;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,17 +18,27 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.pourunmondeeveille.MainActivity;
 import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.model.connexion.ConnexionResponse;
+import com.example.pourunmondeeveille.model.connexion.TokenResponse;
 import com.example.pourunmondeeveille.ui.creationcompte.CreationCompteFragment;
+
+import java.util.Objects;
 
 public class ConnexionFragment extends Fragment {
     private ConnexionViewModel connexionViewModel;
     private EditText nomUtilisateurEditText;
     private EditText motDePasseEditText;
 
+    private static ConnexionFragment instance;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         connexionViewModel = new ViewModelProvider(this).get(ConnexionViewModel.class);
+    }
+
+    public static Context getAppContext() {
+        return instance.requireActivity().getApplicationContext();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,20 +52,18 @@ public class ConnexionFragment extends Fragment {
         motDePasseEditText = view.findViewById(R.id.editTextPassword);
 
         // Observateur unique pour la connexion
-        connexionViewModel.getConnexionResponse().observe(getViewLifecycleOwner(), new Observer<ConnexionResponse>() {
+        connexionViewModel.getConnexionResponse().observe(getViewLifecycleOwner(), new Observer<TokenResponse>() {
             @Override
-            public void onChanged(ConnexionResponse connexionResponse) {
-                if (connexionResponse == null) {
+            public void onChanged(TokenResponse tokenResponse) {
+                if (tokenResponse == null) {
                     // Réponse null signifie échec ou erreur
                     Toast.makeText(getContext(), "Erreur lors de la connexion", Toast.LENGTH_SHORT).show();
-                } else if (connexionResponse.getId() > 0) {
+                } else {
                     // Connexion réussie
+                    //connexionViewModel.setAuthToken();
                     Toast.makeText(getContext(), "Connexion réussie!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
-                } else {
-                    // Connexion échouée
-                    Toast.makeText(getContext(), "Connexion échouée, veuillez réessayer.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
