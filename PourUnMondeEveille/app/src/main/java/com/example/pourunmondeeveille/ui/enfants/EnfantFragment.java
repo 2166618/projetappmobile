@@ -1,5 +1,7 @@
 package com.example.pourunmondeeveille.ui.enfants;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,6 +28,7 @@ import com.example.pourunmondeeveille.databinding.FragmentEnfantsBinding;
 import com.example.pourunmondeeveille.databinding.FragmentFamillesBinding;
 import com.example.pourunmondeeveille.model.enfants.Enfant;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
+import com.example.pourunmondeeveille.ui.familles.FamillesFragment;
 import com.example.pourunmondeeveille.ui.familles.FamillesViewModel;
 
 import java.util.ArrayList;
@@ -41,6 +44,7 @@ public class EnfantFragment extends Fragment {
     private List<String> filteredNomsEnfant = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private CheckBox checkBoxFiltreStatut;
+    private static EnfantFragment instance;
 
     public List<Enfant> getClonedEnfantsList() {
         return clonedEnfantsList;
@@ -53,7 +57,12 @@ public class EnfantFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         enfantViewModel = new ViewModelProvider(this).get(EnfantViewModel.class);
+    }
+
+    public static Context getAppContext() {
+        return instance.requireActivity().getApplicationContext();
     }
 
     @Override
@@ -67,7 +76,11 @@ public class EnfantFragment extends Fragment {
         EditText barreDeRecherche = view.findViewById(R.id.barreDeRecherche);
         checkBoxFiltreStatut = view.findViewById(R.id.nonPlaceCheckBox);
 
-        enfantViewModel.fetchEnfants();
+        // Récupérer le token d'accès depuis SharedPreferences
+        SharedPreferences sharedPreferences = getAppContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        String accessToken = sharedPreferences.getString("accessToken", "");
+
+        enfantViewModel.fetchEnfants(accessToken);
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, filteredNomsEnfant);
         enfantsListView.setAdapter(adapter);

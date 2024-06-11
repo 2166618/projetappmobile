@@ -10,13 +10,20 @@ import com.example.pourunmondeeveille.bd.ApiService;
 import com.example.pourunmondeeveille.bd.RetrofitClient;
 import com.example.pourunmondeeveille.model.enfants.Enfant;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EnfantViewModel extends ViewModel {
     private static final String TAG = "EnfantsViewModel";
@@ -45,7 +52,35 @@ public class EnfantViewModel extends ViewModel {
         return enfantsLiveData;
     }
 
-    public void fetchEnfants() {
+    public void fetchEnfants(String accessToken) {
+        // Ajouter le token d'accès à l'en-tête Authorization
+        String authorizationHeader = "Bearer " + accessToken;
+
+        // Créer un OkHttpClient avec le token d'accès dans l'en-tête
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @NotNull
+                    @Override
+                    public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
+                        Request originalRequest = chain.request();
+                        Request newRequest = originalRequest.newBuilder()
+                                .header("Authorization", authorizationHeader)
+                                .build();
+                        return chain.proceed(newRequest);
+                    }
+                })
+                .build();
+
+        // Créer une nouvelle instance de Retrofit avec le client OkHttpClient
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://projetapi.vercel.app/")  // Remplacez par l'URL de votre API
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+        // Créer une instance de l'interface ApiService avec le nouveau Retrofit
+        ApiService apiService = retrofit.create(ApiService.class);
+
         Call<List<Enfant>> call = apiService.getEnfants();
         call.enqueue(new Callback<List<Enfant>>() {
             @Override

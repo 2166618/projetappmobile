@@ -1,5 +1,7 @@
 package com.example.pourunmondeeveille.ui.familles;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,6 +28,7 @@ import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FamillesFragment extends Fragment {
@@ -38,6 +41,8 @@ public class FamillesFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private CheckBox checkBoxFiltreStatut;
 
+    private static FamillesFragment instance;
+
     public List<FamilleAccueil> getClonedFamillesList() {
         return clonedFamillesList;
     }
@@ -49,7 +54,12 @@ public class FamillesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         famillesViewModel = new ViewModelProvider(this).get(FamillesViewModel.class);
+    }
+
+    public static Context getAppContext() {
+        return instance.requireActivity().getApplicationContext();
     }
 
     @Override
@@ -63,7 +73,11 @@ public class FamillesFragment extends Fragment {
         EditText barreDeRecherche = view.findViewById(R.id.barreDeRecherche);
         checkBoxFiltreStatut = view.findViewById(R.id.enAttenteAccueilCheckBox);
 
-        famillesViewModel.fetchFamillesAccueil();
+        // Récupérer le token d'accès depuis SharedPreferences
+        SharedPreferences sharedPreferences = getAppContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        String accessToken = sharedPreferences.getString("accessToken", "");
+
+        famillesViewModel.fetchFamillesAccueil(accessToken);
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, filteredNomsDeFamille);
         famillesListView.setAdapter(adapter);
