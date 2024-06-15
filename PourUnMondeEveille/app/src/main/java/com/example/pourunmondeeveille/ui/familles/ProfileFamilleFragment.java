@@ -46,13 +46,15 @@ public class ProfileFamilleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             FamilleAccueil familleSelectionnee = (FamilleAccueil) getArguments().getSerializable("familleSelectionnee");
-            setNom(familleSelectionnee.getPostulant().getNom());
-            setStatut(familleSelectionnee.getStatutF().getStatutF());
-            setAdresse(familleSelectionnee.getPostulant().getAdresse());
-            setTelephone(familleSelectionnee.getPostulant().getTelephone());
-            setLangue(familleSelectionnee.getLangue().getLibele());
-            setNationalite(familleSelectionnee.getNationalite().getTitre());
-            setReligion(familleSelectionnee.getReligion().getNom());
+            if (familleSelectionnee.getPostulant() != null){
+                setNom(familleSelectionnee.getPostulant().getNom());
+                setStatut(familleSelectionnee.getStatutF().getStatutF());
+                setAdresse(familleSelectionnee.getPostulant().getAdresse());
+                setTelephone(familleSelectionnee.getPostulant().getTelephone());
+            }
+            setLangue(familleSelectionnee.getLangueF());
+            setNationalite(familleSelectionnee.getNationaliteF());
+            setReligion(familleSelectionnee.getReligionF());
         }
     }
 

@@ -11,9 +11,9 @@ public class FamilleAccueil implements Cloneable, Serializable {
     private int Enfant_Age_Min;
     private int Enfant_Age_Max;
     private int Nbre_Enfant_Voulu;
-    private LangueF langueF;
-    private NationaliteF nationaliteF;
-    private ReligionF religionF;
+    private String langueF;
+    private String nationaliteF;
+    private String religionF;
     private StatutF statutF;
     private Postulant postulant;
 
@@ -45,24 +45,28 @@ public class FamilleAccueil implements Cloneable, Serializable {
         Nbre_Enfant_Voulu = nbre_Enfant_Voulu;
     }
 
-    public LangueF getLangue() {
+    public String getLangueF() {
         return langueF;
     }
 
-    public void setLangue(LangueF langueF) {
+    public void setLangueF(String langueF) {
         this.langueF = langueF;
     }
 
-    public NationaliteF getNationalite() {
+    public String getNationaliteF() {
         return nationaliteF;
     }
 
-    public void setNationalite(NationaliteF nationaliteF) {
+    public void setNationaliteF(String nationaliteF) {
         this.nationaliteF = nationaliteF;
     }
 
-    public ReligionF getReligion() {
+    public String getReligionF() {
         return religionF;
+    }
+
+    public void setReligionF(String religionF) {
+        this.religionF = religionF;
     }
 
     public StatutF getStatutF() {
@@ -71,10 +75,6 @@ public class FamilleAccueil implements Cloneable, Serializable {
 
     public void setStatutF(StatutF statutF) {
         this.statutF = statutF;
-    }
-
-    public void setReligion(ReligionF religionF) {
-        this.religionF = religionF;
     }
 
     public Postulant getPostulant() {
