@@ -57,7 +57,14 @@ public class CreationCompteFragment extends Fragment {
                 String courriel = courrielEditText.getText().toString();
                 String motDePasse = motDePasseEditText.getText().toString();
                 String confirmPassword = confirmerMotDePasseEditText.getText().toString();
-                creationCompteViewModel.createUser(nomUtilisateur, courriel, motDePasse, confirmPassword);
+                if (nomUtilisateur.isEmpty() || courriel.isEmpty() || motDePasse.isEmpty() || confirmPassword.isEmpty()) {
+                    // Vérification des champs vides
+                    Toast.makeText(getContext(), "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
+                } else if (!motDePasse.equals(confirmPassword)){
+                    Toast.makeText(getContext(), "Confimration du mot de passe incorrect", Toast.LENGTH_SHORT).show();
+                } else {
+                    creationCompteViewModel.createUser(nomUtilisateur, courriel, motDePasse, confirmPassword);
+                }
             }
         });
 

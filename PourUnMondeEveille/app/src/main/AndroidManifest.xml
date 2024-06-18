@@ -30,9 +30,6 @@
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
         </activity>
-        <activity android:name=".ui.familles.ProfileFamilleFragment"
-            android:theme="@style/Theme.PourUnMondeEveille.NoActionBar">
-        </activity>
     </application>
 
 </manifest>
