@@ -25,6 +25,8 @@ import androidx.navigation.Navigation;
 import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.databinding.FragmentFamillesBinding;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
+import com.example.pourunmondeeveille.model.placements.Placement;
+import com.example.pourunmondeeveille.ui.placements.PlacementsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,8 @@ import java.util.stream.Collectors;
 
 public class FamillesFragment extends Fragment {
     private FamillesViewModel famillesViewModel;
+    private PlacementsViewModel placementsViewModel;
+    private List<Placement> placementsList = new ArrayList<>();
     private FragmentFamillesBinding binding;
     private ListView famillesListView;
     private List<FamilleAccueil> clonedFamillesList = new ArrayList<>();
@@ -40,6 +44,15 @@ public class FamillesFragment extends Fragment {
     private List<String> filteredNomsDeFamille = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private CheckBox checkBoxFiltreStatut;
+    private String EnfantsAdoptesAvecDateAdoption;
+
+    public String getEnfantsAdoptesAvecDateAdoption() {
+        return EnfantsAdoptesAvecDateAdoption;
+    }
+
+    public void setEnfantsAdoptesAvecDateAdoption(String enfantsAdoptesAvecDateAdoption) {
+        EnfantsAdoptesAvecDateAdoption = enfantsAdoptesAvecDateAdoption;
+    }
 
     private static FamillesFragment instance;
 
@@ -56,6 +69,7 @@ public class FamillesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         instance = this;
         famillesViewModel = new ViewModelProvider(this).get(FamillesViewModel.class);
+        placementsViewModel = new ViewModelProvider(this).get(PlacementsViewModel.class);
     }
 
     public static Context getAppContext() {
@@ -78,6 +92,7 @@ public class FamillesFragment extends Fragment {
         String accessToken = sharedPreferences.getString("accessToken", "");
 
         famillesViewModel.fetchFamillesAccueil(accessToken);
+        placementsViewModel.fetchPlacements(accessToken);
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, filteredNomsDeFamille);
         famillesListView.setAdapter(adapter);
@@ -94,6 +109,13 @@ public class FamillesFragment extends Fragment {
             }
         });
 
+        placementsViewModel.getPlacementsLiveData().observe(getViewLifecycleOwner(), new Observer<List<Placement>>() {
+            @Override
+            public void onChanged(List<Placement> placements) {
+                placementsList = placements;
+            }
+        });
+
         famillesListView.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
             int idFamilleSelectionnee = filteredIdsDeFamille.get(position);
             List<FamilleAccueil> tempList = null;
@@ -106,7 +128,10 @@ public class FamillesFragment extends Fragment {
                     .filter(famille -> famille.getId() == idFamilleSelectionnee)
                     .findFirst()
                     .orElse(null);
-            naviguerAuFragmentProfileFamille(familleSelectionnee);
+            if (familleSelectionnee != null){
+                setEnfantsAdoptesAvecDateAdoption(getStringEnfantsAdoptesAvecDateAdoption(familleSelectionnee.getId()));
+                naviguerAuFragmentProfileFamille(familleSelectionnee);
+            }
         });
 
         barreDeRecherche.addTextChangedListener(new TextWatcher() {
@@ -187,9 +212,31 @@ public class FamillesFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    private String getStringEnfantsAdoptesAvecDateAdoption(int faId) {
+        StringBuilder retour = new StringBuilder();
+
+        // Récupérer les placements de la famille sélectionnée
+        List<Placement> placementsDeLaFamilles = placementsList.stream()
+                .filter(p -> p.getDemandePlacement().getFamilleAccueil().getId() == faId)
+                .collect(Collectors.toList());
+
+        for (Placement p : placementsDeLaFamilles) {
+            retour.append(p.getEnfant().getPrenom()).append(" ")
+                    .append(p.getEnfant().getNom()).append("    ")
+                    .append(p.getDateDebut()).append("\n");
+        }
+
+        if (retour.length() > 0) {
+            retour.setLength(retour.length() - 1);
+        }
+
+        return retour.toString();
+    }
+
     private void naviguerAuFragmentProfileFamille(FamilleAccueil familleSelectionnee) {
         Bundle args = new Bundle();
         args.putSerializable("familleSelectionnee", familleSelectionnee);
+        args.putString("stringEnfantsAdoptesAvecDateAdoption", getEnfantsAdoptesAvecDateAdoption());
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.action_specific_to_profileFamilleFragment, args);
     }

@@ -1,5 +1,7 @@
 package com.example.pourunmondeeveille.ui.familles;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,13 +11,19 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.databinding.FragmentProfileFamilleBinding;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
+import com.example.pourunmondeeveille.model.placements.Placement;
+import com.example.pourunmondeeveille.ui.placements.PlacementsViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ProfileFamilleFragment extends Fragment {
     private FragmentProfileFamilleBinding binding;
@@ -46,11 +54,13 @@ public class ProfileFamilleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             FamilleAccueil familleSelectionnee = (FamilleAccueil) getArguments().getSerializable("familleSelectionnee");
+            String stringEnfantsAdoptes = getArguments().getString("stringEnfantsAdoptesAvecDateAdoption");
             if (familleSelectionnee.getPostulant() != null){
                 setNom(familleSelectionnee.getPostulant().getNom());
                 setStatut(familleSelectionnee.getStatutF().getStatutF());
                 setAdresse(familleSelectionnee.getPostulant().getAdresse());
                 setTelephone(familleSelectionnee.getPostulant().getTelephone());
+                setEnfantsAdoptesAvecDateAdoption(stringEnfantsAdoptes);
             }
             setLangue(familleSelectionnee.getLangueF());
             setNationalite(familleSelectionnee.getNationaliteF());

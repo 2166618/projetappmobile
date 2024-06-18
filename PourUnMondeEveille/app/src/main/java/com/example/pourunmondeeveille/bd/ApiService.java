@@ -6,6 +6,7 @@ import com.example.pourunmondeeveille.model.connexion.TokenResponse;
 import com.example.pourunmondeeveille.model.connexion.Utilisateur;
 import com.example.pourunmondeeveille.model.enfants.Enfant;
 import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
+import com.example.pourunmondeeveille.model.placements.Placement;
 
 import java.util.List;
 
@@ -28,5 +29,8 @@ public interface ApiService {
 
     @GET("/enfants/")
     Call<List<Enfant>> getEnfants();
+
+    @GET("/placements/")
+    Call<List<Placement>> getPlacements();
 
 }
