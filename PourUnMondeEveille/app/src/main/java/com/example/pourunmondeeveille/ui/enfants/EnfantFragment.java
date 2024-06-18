@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,18 +24,19 @@ import androidx.navigation.Navigation;
 
 import com.example.pourunmondeeveille.R;
 import com.example.pourunmondeeveille.databinding.FragmentEnfantsBinding;
-import com.example.pourunmondeeveille.databinding.FragmentFamillesBinding;
 import com.example.pourunmondeeveille.model.enfants.Enfant;
-import com.example.pourunmondeeveille.model.familles.FamilleAccueil;
-import com.example.pourunmondeeveille.ui.familles.FamillesFragment;
-import com.example.pourunmondeeveille.ui.familles.FamillesViewModel;
+import com.example.pourunmondeeveille.model.placements.Placement;
+import com.example.pourunmondeeveille.ui.placements.PlacementsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EnfantFragment extends Fragment {
     private EnfantViewModel enfantViewModel;
+    private PlacementsViewModel placementsViewModel;
+    private List<Placement> placementsList = new ArrayList<>();
     private FragmentEnfantsBinding binding;
     private ListView enfantsListView;
     private List<Enfant> clonedEnfantsList = new ArrayList<>();
@@ -44,6 +44,16 @@ public class EnfantFragment extends Fragment {
     private List<String> filteredNomsEnfant = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private CheckBox checkBoxFiltreStatut;
+    private String familleEtDateAdoption;
+
+    public String getFamilleEtDateAdoption() {
+        return familleEtDateAdoption;
+    }
+
+    public void setFamilleEtDateAdoption(String familleEtDateAdoption) {
+        this.familleEtDateAdoption = familleEtDateAdoption;
+    }
+
     private static EnfantFragment instance;
 
     public List<Enfant> getClonedEnfantsList() {
@@ -59,6 +69,7 @@ public class EnfantFragment extends Fragment {
         super.onCreate(savedInstanceState);
         instance = this;
         enfantViewModel = new ViewModelProvider(this).get(EnfantViewModel.class);
+        placementsViewModel = new ViewModelProvider(this).get(PlacementsViewModel.class);
     }
 
     public static Context getAppContext() {
@@ -81,6 +92,7 @@ public class EnfantFragment extends Fragment {
         String accessToken = sharedPreferences.getString("accessToken", "");
 
         enfantViewModel.fetchEnfants(accessToken);
+        placementsViewModel.fetchPlacements(accessToken);
 
         adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, filteredNomsEnfant);
         enfantsListView.setAdapter(adapter);
@@ -97,6 +109,13 @@ public class EnfantFragment extends Fragment {
             }
         });
 
+        placementsViewModel.getPlacementsLiveData().observe(getViewLifecycleOwner(), new Observer<List<Placement>>() {
+            @Override
+            public void onChanged(List<Placement> placements) {
+                placementsList = placements;
+            }
+        });
+
         enfantsListView.setOnItemClickListener((AdapterView<?> parent, View v, int position, long id) -> {
             int idEnfantSelectionnee = filteredIdsEnfant.get(position);
             List<Enfant> tempList = null;
@@ -109,7 +128,11 @@ public class EnfantFragment extends Fragment {
                     .filter(enfant -> enfant.getId() == idEnfantSelectionnee)
                     .findFirst()
                     .orElse(null);
-            naviguerAuFragmentProfileEnfant(enfantSelectionnee);
+            if (enfantSelectionnee != null){
+                setFamilleEtDateAdoption(getStringFamilleEtDateAdoption(enfantSelectionnee.getId()));
+                naviguerAuFragmentProfileEnfant(enfantSelectionnee);
+            }
+
         });
 
         barreDeRecherche.addTextChangedListener(new TextWatcher() {
@@ -190,9 +213,28 @@ public class EnfantFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    private String getStringFamilleEtDateAdoption(int enfantId) {
+        StringBuilder retour = new StringBuilder();
+
+        // Récupérer les placements de la famille sélectionnée
+        Optional<Placement> placementDeLEnfant = placementsList.stream()
+                .filter(p -> p.getEnfant().getId() == enfantId)
+                .findFirst();
+
+        if (placementDeLEnfant.isPresent()) {
+            Placement placement = placementDeLEnfant.get();
+            retour.append("Famille ").append(
+                    placement.getDemandePlacement().getFamilleAccueil().getPostulant().getNom())
+                    .append("   ").append(placement.getDateDebut());
+        }
+
+        return retour.toString();
+    }
+
     private void naviguerAuFragmentProfileEnfant(Enfant enfantSelectionnee) {
         Bundle args = new Bundle();
         args.putSerializable("enfantSelectionnee", enfantSelectionnee);
+        args.putString("stringFamilleEtDateAdoption", getFamilleEtDateAdoption());
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.action_specific_to_profileEnfantFragment, args);
     }

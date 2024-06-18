@@ -44,6 +44,7 @@ public class ProfileEnfantFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Enfant enfantSelectionnee = (Enfant) getArguments().getSerializable("enfantSelectionnee");
+            String stringFamilleAdoption = getArguments().getString("stringFamilleEtDateAdoption");
             setNom(enfantSelectionnee.getNom());
             setStatut(enfantSelectionnee.getStatutE().getStatutE());
             int age = enfantSelectionnee.getAge();
@@ -52,6 +53,7 @@ public class ProfileEnfantFragment extends Fragment {
             setLangue(enfantSelectionnee.getLangueE());
             setNationalite(enfantSelectionnee.getNationaliteE());
             setReligion(enfantSelectionnee.getReligionE());
+            setFamilleDAdoption(stringFamilleAdoption);
         }
     }
 
