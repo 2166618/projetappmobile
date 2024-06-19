@@ -58,15 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/connexion" />
-
-        <Button
-            android:id="@+id/btnCreationCompte"
-            android:layout_width="365dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/creation_compte" />
-
-
+        
     </LinearLayout>
 
 </FrameLayout>

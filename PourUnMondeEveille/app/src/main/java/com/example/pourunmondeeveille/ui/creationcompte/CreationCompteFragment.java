@@ -44,7 +44,6 @@ public class CreationCompteFragment extends Fragment {
         motDePasseEditText = view.findViewById(R.id.editTextMotDePasse);
         confirmerMotDePasseEditText = view.findViewById(R.id.editTextConfirmerLeMotDePasse);
         Button btnCreationCompte = view.findViewById(R.id.btnCreationCompte);
-        Button btnConnexion = view.findViewById(R.id.btnConnexion);
         errorTextView = view.findViewById(R.id.error_text_view);
 
         creationCompteViewModel.getErrorMessages().observe(getViewLifecycleOwner(), this::showErrorMessage);
@@ -65,13 +64,6 @@ public class CreationCompteFragment extends Fragment {
                 } else {
                     creationCompteViewModel.createUser(nomUtilisateur, courriel, motDePasse, confirmPassword);
                 }
-            }
-        });
-
-        btnConnexion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                naviguerAuFragmentConnexion();
             }
         });
 

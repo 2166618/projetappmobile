@@ -26,7 +26,6 @@ public class PageAccueilActivity extends AppCompatActivity {
         contenuFragment = findViewById(R.id.contenu_fragment);
 
         Button btnConnexion = (Button) findViewById(R.id.btnConnexion);
-        Button btnCreationCompte = (Button) findViewById(R.id.btnCreationCompte);
 
         btnConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,18 +40,6 @@ public class PageAccueilActivity extends AppCompatActivity {
             }
         });
 
-        btnCreationCompte.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                contenuAccueil.setVisibility(View.GONE);
-                contenuFragment.setVisibility(View.VISIBLE);
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contenu_fragment, new CreationCompteFragment())
-                        .commit();
-
-            }
-        });
     }
 
 }

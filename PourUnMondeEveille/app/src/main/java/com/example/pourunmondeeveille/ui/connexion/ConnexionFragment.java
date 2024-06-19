@@ -47,7 +47,6 @@ public class ConnexionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_connexion, container, false);
 
         Button btnConnexion = view.findViewById(R.id.btnConnexion);
-        Button btnCreationCompte = view.findViewById(R.id.btnCreationCompte);
         nomUtilisateurEditText = view.findViewById(R.id.editTextNomUtilisateur);
         motDePasseEditText = view.findViewById(R.id.editTextPassword);
 
@@ -80,13 +79,6 @@ public class ConnexionFragment extends Fragment {
                 } else {
                     connexionViewModel.connexionUtilisateur(nomUtilisateur, motDePasse);
                 }
-            }
-        });
-
-        btnCreationCompte.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                naviguerAuFragmentCreationCompte();
             }
         });
 

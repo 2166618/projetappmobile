@@ -16,5 +16,9 @@
             android:id="@+id/nav_enfants"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/nav_enfants" />
+        <item
+            android:id="@+id/nav_creer_un_compte"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/nav_creer_compte" />
     </group>
 </menu>

@@ -24,7 +24,7 @@ public interface ApiService {
     @POST("/users/create/")
     Call<ResponseBody> creerUtilisateur(@Body Utilisateur utilisateur);
 
-    @GET("/familles-accueil/")
+    @GET("/familles-accueil-2/")
     Call<List<FamilleAccueil>> getFamillesAccueil();
 
     @GET("/enfants/")

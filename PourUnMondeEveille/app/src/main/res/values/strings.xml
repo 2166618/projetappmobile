@@ -13,6 +13,7 @@
     <string name="nav_a_propos">À propos</string>
     <string name="nav_familles">Familles</string>
     <string name="nav_enfants">Enfants</string>
+    <string name="nav_creer_compte">Créer un compte</string>
     <string name="nav_modifier_informations_compte">Modifier les informations du compte</string>
 
     <string name="bienvenue">Bienvenue !</string>

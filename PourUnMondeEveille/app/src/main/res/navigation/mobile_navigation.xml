@@ -40,4 +40,10 @@
         android:id="@+id/profileEnfantFragment"
         android:name="com.example.pourunmondeeveille.ui.enfants.ProfileEnfantFragment"
         android:label="Profile de l'enfant"/>
+
+    <fragment
+        android:id="@+id/nav_creer_un_compte"
+        android:name="com.example.pourunmondeeveille.ui.creationcompte.CreationCompteFragment"
+        android:label="Creation d'un compte"/>
+
 </navigation>

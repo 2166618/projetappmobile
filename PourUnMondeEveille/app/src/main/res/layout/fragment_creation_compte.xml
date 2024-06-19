@@ -57,13 +57,6 @@
             android:layout_marginTop="50dp"
             android:text="@string/creation_compte" />
 
-        <Button
-            android:id="@+id/btnConnexion"
-            android:layout_width="365dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="@string/connexion" />
-
         <!-- TextView pour afficher les erreurs -->
         <TextView
             android:id="@+id/error_text_view"
